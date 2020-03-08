@@ -715,3 +715,28 @@ void searchRecord(vector<tuple<string, string, double>>& vec)
 	default: break;
 	}
 }
+
+//Searches vector based on Last name (and prints result)
+void searchRecordLast(vector<tuple<string, string, double>> vec, string name)
+{
+
+	//Find matching record
+	auto it = find_if(vec.begin(), vec.end(), [&](const tuple<string, string, double>& e)
+		{return get<1>(e) == name; });
+
+	//If match found
+	if (it != vec.end())
+	{
+		//Display record
+		cout << "Found." << endl;
+		cout << get<1>(*it) << ", " << get<0>(*it) << " (" << fixed
+			<< setprecision(0) << get<2>(*it) << ")" << endl;
+	}
+
+	//If no match found
+	else
+	{
+		cout << "Couldn't find a match." << endl;
+	}
+
+}
