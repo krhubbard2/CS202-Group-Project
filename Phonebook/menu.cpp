@@ -69,3 +69,11 @@ void addRecord(vector<tuple<string, string, double>> &vec)
   vec.push_back(make_tuple(firstname, lastname, phone));
   cout << "Entry added succesfully." << endl;
 }
+
+
+//Sort vector (tuple) by second item (last name)
+bool sortVec(const tuple<string, string, double>&a,
+          const tuple<string, string, double>&b)
+{
+  return(get<1>(a) < get<1>(b));
+}
