@@ -77,3 +77,24 @@ bool sortVec(const tuple<string, string, double>&a,
 {
   return(get<1>(a) < get<1>(b));
 }
+
+
+//Prints record out to user "Last, First Number"
+void printRecords(vector<tuple<string, string, double>> &vec)
+{
+  //If vector is empty, show user
+  if (vec.size() == 0)
+  {
+    cout << "Database is empty." << endl;
+  }
+  //Print database in form of Last, First & Phonenumber
+  else
+  {
+    cout << "Names" << setw(40) << "Phone" << " numbers" << endl;
+    for (auto p : vec)
+    {
+      cout << get<1>(p) << ", " << get<0>(p) << setw(40)
+           << fixed << std::setprecision(0) << get<2>(p) << endl;
+    }
+  }
+}
