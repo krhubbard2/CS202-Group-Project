@@ -627,3 +627,91 @@ void modifyRecord(vector<tuple<string, string, double>>& vec)
 		}
 	}
 }
+
+//Base Search Record Function
+void searchRecord(vector<tuple<string, string, double>>& vec)
+{
+	cout << "Search record." << endl;
+	cout << "1) Search by last name" << endl;
+	cout << "2) Search by first name" << endl;
+	cout << "3) Search by phone number" << endl;
+	cout << "4) Main menu" << endl;
+
+	//Grab selection
+	string s1;
+	getline(cin, s1);
+	istringstream iss2(s1);
+	int switchval;
+	iss2 >> switchval;
+
+	//Invalid selection
+	if (!iss2)
+	{
+		cout << "Invalid entry. Going back to main menu." << endl;
+	}
+
+	//Valid selection--continue
+	switch (switchval)
+	{
+
+		//Search record by last name
+	case 1:
+	{
+		cout << "Please enter last name: ";
+
+		//Grab name to search
+		string l1;
+		getline(cin, l1);
+
+		//Search
+		searchRecordLast(vec, l1);
+	}
+	break;
+
+	//Search record by first name
+	case 2:
+	{
+		cout << "Please enter first name: ";
+
+		//Grab name to search
+		string f1;
+		getline(cin, f1);
+
+		//Search
+		searchRecordFirst(vec, f1);
+	}
+	break;
+
+	//Search record by phone number
+	case 3:
+	{
+		cout << "Please enter phone number (no \".\" or \"-\"): ";
+
+		//Grab number to search
+		string p1;
+		getline(cin, p1);
+		istringstream iss3(p1);
+		double p2;
+		iss3 >> p2;
+
+		//If not a number
+		if (!iss3)
+		{
+			cout << "Invalid entry." << endl;
+		}
+
+		//If a number
+		else
+		{
+			//Search
+			searchRecordPhone(vec, p2);
+		}
+	}
+
+	//Return to main menu
+	case 4: break;
+
+		//Return to main menu
+	default: break;
+	}
+}
