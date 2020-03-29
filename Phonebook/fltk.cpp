@@ -47,7 +47,8 @@ Fl_Double_Window* runFLTK() {
     w = window;
 
     //Drop down menu bar
-    { Fl_Menu_Bar* menuBar = new Fl_Menu_Bar(0, 0, 75, 25);
+    { Fl_Menu_Bar* menuBar
+        = new Fl_Menu_Bar(0, 0, 75, 25);
       //When selected runs "open()"" in fltk.cpp
       menuBar->add("File/Open", 0, open);
       //When selected runs "save()"" in fltk.cpp
@@ -56,18 +57,36 @@ Fl_Double_Window* runFLTK() {
       menuBar->add("File/Quit", 0, quit);
     }
 
+    //Search Record Button
+    { Fl_Button* searchButton
+        = new Fl_Button(30, 350, 110, 25, "Search Record");
+    }
+
+    //Add Record Button
+    { Fl_Button* addButton
+        = new Fl_Button(310, 350, 110, 25, "Add Record");
+    }
+
+    //Modify Record Button
+    { Fl_Button* modifyButton
+        = new Fl_Button(170, 350, 110, 25, "Modify Record");
+    }
+
+    //Delete Record Button
+    { Fl_Button* deleteButton
+        = new Fl_Button(445, 350, 110, 25, "Delete Record");
+    }
+
+    //Text Display for Printing Records to Screen
+    { Fl_Text_Display* textDisplay
+        = new Fl_Text_Display(25, 45, 530, 275);
+    }
 
     window->end();
     window->resizable(window);
 
     window->show();
   }
-
-
-
-
-
-
 
 
 

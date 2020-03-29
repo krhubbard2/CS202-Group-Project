@@ -12,6 +12,7 @@
 #include <FL/Fl_Menu_Bar.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
+#include <Fl/Fl_Text_Display.H>
 
 Fl_Double_Window* runFLTK();
 void file_open_cb(Fl_Widget* w, void* data);
