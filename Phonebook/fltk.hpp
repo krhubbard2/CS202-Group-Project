@@ -14,6 +14,7 @@
 #include <FL/Fl_Box.H>
 #include <Fl/Fl_Text_Display.H>
 
+#pragma comment(lib, "fltk.lib")
 Fl_Double_Window* runFLTK();
 void file_open_cb(Fl_Widget* w, void* data);
 

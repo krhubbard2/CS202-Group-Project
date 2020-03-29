@@ -5,6 +5,7 @@
 #include "phonebook.hpp"
 #include "fltk.hpp"
 
+#pragma comment(lib, "fltk.lib")
 
 int main(int argc, char** argv)
 {

@@ -80,7 +80,7 @@ void deleteRecordPhone(vector<tuple<string, string, double>> &vec, double phone)
 //Searches existing records
 void searchRecord(vector<tuple<string, string, double>> &vec);
 
-//Deletes record (implaments deleteRecord(F,L,P))
+//Deletes record (implements deleteRecord(F,L,P))
 void deleteRecord(vector<tuple<string, string, double>> &vec);
 
 
