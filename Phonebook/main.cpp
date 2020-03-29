@@ -3,10 +3,14 @@
 // CS202 Group Project
 // The Alaskan Phonebook
 #include "phonebook.hpp"
+#include "fltk.hpp"
 
 
-int main()
+int main(int argc, char** argv)
 {
+  runFLTK();
+  return Fl::run();
+
   vector<tuple<string, string, double>> phonebook;
 
   //Sample entrys
