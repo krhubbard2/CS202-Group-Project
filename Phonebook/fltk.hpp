@@ -16,6 +16,7 @@
 Fl_Double_Window* runFLTK();
 void file_open_cb(Fl_Widget* w, void* data);
 
-void test(Fl_Widget* w, void* data);
-
+void save(Fl_Widget* w, void* data);
+void quit(Fl_Widget* w, void* data);
+void open(Fl_Widget* w, void* data);
 #endif
