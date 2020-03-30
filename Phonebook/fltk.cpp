@@ -20,6 +20,12 @@ void open(Fl_Widget* w, void* data)
   cout << "Open" << endl;
 }
 
+//Help function for menu dropdown bar
+void help(Fl_Widget* w, void* data)
+{
+  cout << "Help" << endl;
+}
+
 //Exits program
 void quitProgram(Fl_Widget* w, void* data)
 {
@@ -73,13 +79,15 @@ Fl_Double_Window* runFLTK() {
 
     //Drop down menu bar
     { Fl_Menu_Bar* menuBar
-        = new Fl_Menu_Bar(0, 0, 75, 25);
-      //When selected runs "open()"" in fltk.cpp
+        = new Fl_Menu_Bar(0, 0, 85, 25);
+      //When selected runs "open()" in fltk.cpp
       menuBar->add("File/Open", 0, open);
-      //When selected runs "save()"" in fltk.cpp
+      //When selected runs "save()" in fltk.cpp
       menuBar->add("File/Save", 0, save);
-      //When selected runs "quit()"" in fltk.cpp
+      //When selected runs "quit()" in fltk.cpp
       menuBar->add("File/Quit", 0, quit);
+      //When selected runs "help()" in fltk.cpp
+      menuBar->add("Help/Help", 0, help);
     }
 
     //Search Record Button
@@ -117,7 +125,7 @@ Fl_Double_Window* runFLTK() {
     }
 
     window->end();
-    window->resizable(window);
+    // window->resizable(window);
 
     window->show();
   }
