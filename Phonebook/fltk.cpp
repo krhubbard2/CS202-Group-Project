@@ -78,8 +78,13 @@ Fl_Double_Window* runFLTK() {
     }
 
     //Text Display for Printing Records to Screen
-    { Fl_Text_Display* textDisplay
+    { Fl_Text_Buffer* buff = new Fl_Text_Buffer();
+      Fl_Text_Display* textDisplay
         = new Fl_Text_Display(25, 45, 530, 275);
+        textDisplay->buffer(buff);
+      buff->text("line 0\n"
+                "line 1\n"
+                "line 2\n");
     }
 
     window->end();

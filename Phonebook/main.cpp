@@ -9,6 +9,8 @@
 int main(int argc, char** argv)
 {
 
+  runFLTK();
+  return Fl::run();
 
   vector<tuple<string, string, double>> phonebook;
 
@@ -102,7 +104,6 @@ switch (switchx)
 
 cout << "Goodbye." << endl;
 
-runFLTK();
-return Fl::run();
+
 
 }
