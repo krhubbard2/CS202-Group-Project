@@ -81,13 +81,13 @@ Fl_Double_Window* runFLTK() {
     { Fl_Menu_Bar* menuBar
         = new Fl_Menu_Bar(0, 0, 85, 25);
       //When selected runs "open()" in fltk.cpp
-      menuBar->add("File/Open", 0, open);
+      menuBar->add("File/Open", FL_CTRL+'o', open);
       //When selected runs "save()" in fltk.cpp
-      menuBar->add("File/Save", 0, save);
+      menuBar->add("File/Save", FL_CTRL+'s', save);
       //When selected runs "quit()" in fltk.cpp
-      menuBar->add("File/Quit", 0, quit);
+      menuBar->add("File/Quit", FL_CTRL+'q', quit);
       //When selected runs "help()" in fltk.cpp
-      menuBar->add("Help/Help", 0, help);
+      menuBar->add("Help/Help", FL_CTRL+'h', help);
     }
 
     //Search Record Button
