@@ -716,3 +716,261 @@ void searchRecord(vector<tuple<string, string, double>>& vec)
 	default: break;
 	}
 }
+
+
+//Searches vector based on Last name (and prints result)
+void searchRecordLast(vector<tuple<string, string, double>> vec, string name)
+{
+
+  //Find matching record
+  auto it = find_if(vec.begin(), vec.end(), [&](const tuple<string, string, double>&e)
+            {return get<1>(e) == name;});
+
+  //If match found
+  if (it != vec.end())
+  {
+    //Display record
+    cout << "Found." << endl;
+    cout << get<1>(*it) << ", " << get<0>(*it) << " (" << fixed
+         << setprecision(0) <<get<2>(*it) << ")" << endl;
+  }
+
+  //If no match found
+  else
+  {
+    cout << "Couldn't find a match." << endl;
+  }
+
+}
+
+//Searches vector based on First name (and prints result)
+void searchRecordFirst(vector<tuple<string, string, double>> vec, string name)
+{
+
+  //Find matching record
+  auto it = find_if(vec.begin(), vec.end(), [&](const tuple<string, string, double>&e)
+            {return get<0>(e) == name;});
+
+  //If match found
+  if (it != vec.end())
+  {
+    //Display record
+    cout << "Found." << endl;
+    cout << get<1>(*it) << ", " << get<0>(*it) << " (" << fixed
+         << setprecision(0) <<get<2>(*it) << ")" << endl;
+  }
+
+  //If no match found
+  else
+  {
+    cout << "Couldn't find a match." << endl;
+  }
+}
+
+//Searches vector based on Phone number (and prints result)
+void searchRecordPhone(vector<tuple<string, string, double>> vec, double phone)
+{
+
+  //Find matching record
+  auto it = find_if(vec.begin(), vec.end(), [&](const tuple<string, string, double>&e)
+            {return get<2>(e) == phone;});
+
+  //If match found
+  if (it != vec.end())
+  {
+    //Display record
+    cout << "Found." << endl;
+    cout << get<1>(*it) << ", " << get<0>(*it) << " (" << fixed
+         << setprecision(0) <<get<2>(*it) << ")" << endl;
+  }
+
+  //If no match found
+  else
+  {
+    cout << "Couldn't find a match." << endl;
+  }
+}
+
+//Delete record based off last name
+void deleteRecordLast(vector<tuple<string, string, double>> &vec, string name)
+{
+  //Find matching record
+  auto it = find_if(vec.begin(), vec.end(), [&](const tuple<string, string, double>&e)
+            {return get<1>(e) == name;});
+
+  //If record found
+  if (it != vec.end())
+  {
+    //Display record
+    cout << "Record found." << endl;
+    cout << get<1>(*it) << ", " << get<0>(*it) << " (" << fixed
+         << setprecision(0) <<get<2>(*it) << ")" << endl;
+
+    //Ensure it's the one they want to delete
+    cout << "Are you sure you'd like to delete this record (Y/N): ";
+    string yes;
+    getline(cin, yes);
+    if (yes == "yes" || yes == "Y" || yes == "YES"
+       || yes == "y" || yes == "Yes")
+    {
+      //If yes--delete
+      vec.erase(it);
+      cout << "Entry deleted." << endl;
+    }
+
+    //If no--return to main menu
+    else
+    {
+      cout << "Cancelled. Exiting to main menu." << endl;
+    }
+  }
+
+  //No matching record found
+  else
+  {
+    cout << "Couldn't find record. Returning to main menu." << endl;
+  }
+
+}
+
+//Delete record based off first name
+void deleteRecordFirst(vector<tuple<string, string, double>> &vec, string name)
+{
+  //Find matching record
+  auto it = find_if(vec.begin(), vec.end(), [&](const tuple<string, string, double>&e)
+            {return get<0>(e) == name;});
+
+  //If match found
+  if (it != vec.end())
+  {
+    //Display record
+    cout << "Record found." << endl;
+    cout << get<1>(*it) << ", " << get<0>(*it) << " (" << fixed
+         << setprecision(0) <<get<2>(*it) << ")" << endl;
+
+    //Ensure it's the record they want to delete
+    cout << "Are you sure you'd like to delete this record (Y/N): ";
+
+    string yes;
+    getline(cin, yes);
+    if (yes == "yes" || yes == "Y" || yes == "YES"
+       || yes == "y" || yes == "Yes")
+    {
+      //If yes--delete
+      vec.erase(it);
+      cout << "Entry deleted." << endl;
+    }
+
+    //If no--return to main menu
+    else
+    {
+      cout << "Cancelled. Exiting to main menu." << endl;
+    }
+  }
+
+  //No match found
+  else
+  {
+    cout << "Couldn't find record. Returning to main menu." << endl;
+  }
+}
+
+//Delete record based off phone number
+void deleteRecordPhone(vector<tuple<string, string, double>> &vec, double phone)
+{
+  //Find matching record
+  auto it = find_if(vec.begin(), vec.end(), [&](const tuple<string, string, double>&e)
+            {return get<2>(e) == phone;});
+
+  //If record found
+  if (it != vec.end())
+  {
+    //Display record
+    cout << "Record found." << endl;
+    cout << get<1>(*it) << ", " << get<0>(*it) << " (" << fixed
+         << setprecision(0) <<get<2>(*it) << ")" << endl;
+
+    //Ensure record they want to delete
+    cout << "Are you sure you'd like to delete this record (Y/N): ";
+
+    string yes;
+    getline(cin, yes);
+    if (yes == "yes" || yes == "Y" || yes == "YES"
+       || yes == "y" || yes == "Yes")
+    {
+      //If yes--delete
+      vec.erase(it);
+      cout << "Entry deleted." << endl;
+    }
+
+    //If no--return to main menu
+    else
+    {
+      cout << "Cancelled. Exiting to main menu." << endl;
+    }
+  }
+
+  //No matching record found
+  else
+  {
+    cout << "Couldn't find record. Returning to main menu." << endl;
+  }
+}
+
+void deleteRecord(vector<tuple<string, string, double>> &vec)
+{
+  cout << "Delete record." << endl;
+  cout << "1) Delete by last name" << endl;
+  cout << "2) Delete by first name" << endl;
+  cout << "3) Delete by phone number" << endl;
+  cout << "4) Main menu" << endl;
+
+  string ss1;
+  getline(cin, ss1);
+  istringstream iss3(ss1);
+  int switchval1;
+  iss3 >> switchval1;
+  if (!iss3)
+  {
+    cout << "Invalid entry. Going back to main menu." << endl;
+  }
+  switch(switchval1)
+  {
+    case 1:
+      {
+        cout << "Please enter last name: ";
+        string ll1;
+        getline(cin, ll1);
+        deleteRecordLast(vec, ll1);
+      }
+      break;
+    case 2:
+      {
+        cout << "Please enter first name: ";
+        string ff1;
+        getline(cin, ff1);
+        deleteRecordFirst(vec, ff1);
+      }
+      break;
+    case 3:
+      {
+        cout << "Please enter phone number (no \".\" or \"-\"): ";
+        string pp1;
+        getline(cin, pp1);
+        istringstream iss4(pp1);
+        double pp2;
+        iss4 >> pp2;
+        if (!iss4)
+        {
+          cout << "Invalid entry." << endl;
+        }
+        else
+        {
+          deleteRecordPhone(vec, pp2);
+        }
+      }
+      case 4: break;
+
+      default: break;
+    }
+  };
