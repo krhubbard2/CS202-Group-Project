@@ -82,9 +82,9 @@ Fl_Double_Window* runFLTK() {
       Fl_Text_Display* textDisplay
         = new Fl_Text_Display(25, 45, 530, 275);
         textDisplay->buffer(buff);
-      buff->text("line 0\n"
-                "line 1\n"
-                "line 2\n");
+      buff->text("Welcome to the Alaskan Phonebook.\nTo get started press any"
+                " of the following buttons.\nYour records will show here.\n"
+                "Enjoy.\n");
     }
 
     window->end();
