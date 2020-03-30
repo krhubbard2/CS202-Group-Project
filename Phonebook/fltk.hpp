@@ -18,6 +18,11 @@ Fl_Double_Window* runFLTK();
 void file_open_cb(Fl_Widget* w, void* data);
 
 void save(Fl_Widget* w, void* data);
-void quit(Fl_Widget* w, void* data);
+void quitProgram(Fl_Widget* w, void* data);
 void open(Fl_Widget* w, void* data);
+void searchCallback(Fl_Widget* w, void* data);
+void modifyCallback(Fl_Widget* w, void* data);
+void addCallback(Fl_Widget* w, void* data);
+void DeleteCallback(Fl_Widget* w, void* data);
+
 #endif

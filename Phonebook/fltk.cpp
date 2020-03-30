@@ -11,18 +11,43 @@ using std::endl;
 //Save function for menu dropdown bar
 void save(Fl_Widget* w, void* data)
 {
-  cout << "save" << endl;
+  cout << "Save" << endl;
 }
 
 //Open function for menu dropdown bar
 void open(Fl_Widget* w, void* data)
 {
-  cout << "open" << endl;
+  cout << "Open" << endl;
 }
 
-void yesQuit(Fl_Widget* w, void* data)
+//Exits program
+void quitProgram(Fl_Widget* w, void* data)
 {
   exit(0);
+}
+
+//Search Record Button Callback
+void searchCallback(Fl_Widget* w, void* data)
+{
+  cout << "Search Record\n";
+}
+
+//Modify Record Button Callback
+void modifyCallback(Fl_Widget* w, void* data)
+{
+  cout << "Modify Record\n";
+}
+
+//Add Record Button Callback
+void addCallback(Fl_Widget* w, void* data)
+{
+  cout << "Add Record\n";
+}
+
+//Delete Record Button Callback
+void deleteCallback(Fl_Widget* w, void* data)
+{
+  cout << "Delete Record\n";
 }
 
 //Quit function for menu dropdown bar
@@ -31,7 +56,7 @@ void quit(Fl_Widget* w, void* data)
    Fl_Window* window = new Fl_Window(340, 150, "Quit");
    Fl_Box* box = new Fl_Box(20, 40, 300, 35, "Are you sure you want to quit?");
    Fl_Button* yesButton = new Fl_Button(120, 100, 100, 25, "Yes I\'m sure.");
-   yesButton->callback(yesQuit);
+   yesButton->callback(quitProgram);
 
    box->show();
    window->show();
@@ -60,21 +85,25 @@ Fl_Double_Window* runFLTK() {
     //Search Record Button
     { Fl_Button* searchButton
         = new Fl_Button(30, 350, 110, 25, "Search Record");
+      searchButton->callback(searchCallback);
     }
 
     //Add Record Button
     { Fl_Button* addButton
         = new Fl_Button(310, 350, 110, 25, "Add Record");
+      addButton->callback(addCallback);
     }
 
     //Modify Record Button
     { Fl_Button* modifyButton
         = new Fl_Button(170, 350, 110, 25, "Modify Record");
+      modifyButton->callback(modifyCallback);
     }
 
     //Delete Record Button
     { Fl_Button* deleteButton
         = new Fl_Button(445, 350, 110, 25, "Delete Record");
+      deleteButton->callback(deleteCallback);
     }
 
     //Text Display for Printing Records to Screen
