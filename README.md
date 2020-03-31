@@ -1,7 +1,10 @@
 # CS202-Group-Project
-Kelby Hubbard
-Chuluunbut Purev
+
 The Alaskan Phonebook
+
+Kelby Hubbard
+
+Chuluunbut Purev
 
 This is our code for our CS202 Group Project at Univeristy of Alaska Fairbanks.
 
