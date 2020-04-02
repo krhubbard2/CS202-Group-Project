@@ -71,39 +71,37 @@ int main(int argc, char** argv)
 
   //Menu selection
 
-switch (switchx)
-{
-  //Add Record
-  case 1:
-          addRecord(phonebook);
-          break;
+    switch (switchx)
+    {
+      //Add Record
+      case 1:
+              addRecord(phonebook);
+              break;
 
-  //Print Record
-  case 2:
-          sort(phonebook.begin(), phonebook.end(), sortVec);
-          printRecords(phonebook);
-          break;
+      //Print Record
+      case 2:
+              sort(phonebook.begin(), phonebook.end(), sortVec);
+              printRecords(phonebook);
+              break;
 
-  //Modify Record
-  case 3: modifyRecord(phonebook);
-          break;
+      //Modify Record
+      case 3: modifyRecord(phonebook);
+              break;
 
-  //Search Record
-  case 4: searchRecord(phonebook);
-          break;
+      //Search Record
+      case 4: searchRecord(phonebook);
+              break;
 
-  //Delete Record
-  case 5: deleteRecord(phonebook);
-          break;
+      //Delete Record
+      case 5: deleteRecord(phonebook);
+              break;
 
-  //Exit Program
-  case 6: mainLoop = false;
-          break;
-}
-}
+      //Exit Program
+      case 6: mainLoop = false;
+              break;
+    }
+  }
 
-cout << "Goodbye." << endl;
-
-
-
+  cout << "Goodbye." << endl;
+  
 }
