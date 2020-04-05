@@ -8,7 +8,6 @@
 using std::cout;
 using std::endl;
 
-#pragma comment(lib, "fltk.lib")
 //Save function for menu dropdown bar
 void save(Fl_Widget* w, void* data)
 {

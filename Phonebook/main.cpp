@@ -89,11 +89,11 @@ switch (switchx)
           break;
 
   //Search Record
-  case 4: searchRecord(phonebook);
+  case 4: //searchRecord(phonebook);
           break;
 
   //Delete Record
-  case 5: deleteRecord(phonebook);
+  case 5: //deleteRecord(phonebook);
           break;
 
   //Exit Program
