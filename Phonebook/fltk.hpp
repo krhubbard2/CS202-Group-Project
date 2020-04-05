@@ -29,6 +29,8 @@ using std::make_tuple;
 using std::get;
 #include <string>
 
+#include "phonebook.hpp"
+
 // Derive a class from Fl_Table_Row
 class MyTable : public Fl_Table_Row {
 public:

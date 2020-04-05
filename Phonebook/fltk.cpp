@@ -71,59 +71,7 @@ vector<tuple<string, string, double>> _phonebook;
 void getVector(vector<tuple<string, string, double>>& v) {
 	_phonebook = v;
 }
-//Main run function for FLTK/GUI
-Fl_Double_Window* runFLTK() {
-	//Main Window
-	Fl_Double_Window* window;
-	{ window = new Fl_Double_Window
-	(605, 405, "Alaskan Phonebook");
 
-	//Table to display data
-	MyTable table(25, 45, 530, 275, _phonebook.size());
-
-	//Drop down menu bar
-	{ Fl_Menu_Bar* menuBar
-		= new Fl_Menu_Bar(0, 0, 85, 25);
-	//When selected runs "open()" in fltk.cpp
-	menuBar->add("File/Open", FL_CTRL + 'o', open);
-	//When selected runs "save()" in fltk.cpp
-	menuBar->add("File/Save", FL_CTRL + 's', save);
-	//When selected runs "quit()" in fltk.cpp
-	menuBar->add("File/Quit", FL_CTRL + 'q', quit);
-	//When selected runs "help()" in fltk.cpp
-	menuBar->add("Help/Help", FL_CTRL + 'h', help);
-	}
-
-	//Search Record Button
-	{ Fl_Button* searchButton
-		= new Fl_Button(30, 350, 110, 25, "Search Record");
-	searchButton->callback(searchCallback);
-	}
-
-	//Add Record Button
-	{ Fl_Button* addButton
-		= new Fl_Button(310, 350, 110, 25, "Add Record");
-	addButton->callback(addCallback);
-	}
-
-	//Modify Record Button
-	{ Fl_Button* modifyButton
-		= new Fl_Button(170, 350, 110, 25, "Modify Record");
-	modifyButton->callback(modifyCallback);
-	}
-
-	//Delete Record Button
-	{ Fl_Button* deleteButton
-		= new Fl_Button(445, 350, 110, 25, "Delete Record");
-	deleteButton->callback(deleteCallback);
-	}
-
-
-	window->end();
-	window->resizable(table);
-	}
-	return window;
-}
 
 void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H) {
 	fl_push_clip(X, Y, W, H);
