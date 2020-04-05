@@ -173,4 +173,3 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		return;
 	}
 }
-

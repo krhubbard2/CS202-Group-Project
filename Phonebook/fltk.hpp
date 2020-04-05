@@ -5,7 +5,7 @@
 
 #ifndef FLTK_HPP_
 #define FLTK_HPP_
-#define WIN32
+//#define WIN32
 
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
@@ -73,8 +73,8 @@ void help(Fl_Widget* w, void* data);
 void searchCallback(Fl_Widget* w, void* data);
 void modifyCallback(Fl_Widget* w, void* data);
 void addCallback(Fl_Widget* w, void* data);
-void DeleteCallback(Fl_Widget* w, void* data);
-void getVector(extern vector<tuple<string, string, double>>& v);
+void deleteCallback(Fl_Widget* w, void* data);
+void getVector(vector<tuple<string, string, double>>& v);
 
 
 

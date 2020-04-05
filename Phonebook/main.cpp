@@ -14,7 +14,7 @@ int main(int argc, char** argv){
 	_phonebook.push_back(make_tuple("DTestF", "DTestL", 3607029061));
 	_phonebook.push_back(make_tuple("ATestF", "ATestL", 3607029066));
 	_phonebook.push_back(make_tuple("CTestF", "CTestL", 3607029068));
-	
+
 	getVector(_phonebook);
 
 	//Main Window
@@ -55,10 +55,10 @@ int main(int argc, char** argv){
 	}
 
 	//Delete Record Button
-	/*{ Fl_Button* deleteButton
+	{ Fl_Button* deleteButton
 		= new Fl_Button(445, 350, 110, 25, "Delete Record");
 	deleteButton->callback(deleteCallback);
-	}*/
+	}
 
 
 	window->end();
