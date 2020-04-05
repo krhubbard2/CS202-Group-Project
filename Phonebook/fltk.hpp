@@ -60,11 +60,11 @@ public:
 		col_width_all(162);          // default width of columns
 		col_resize(1);              // enable column resizing
 		end();                      // end the Fl_Table group
+
 	}
 	~MyTable() { }
 };
 
-//Fl_Double_Window* runFLTK();
 void file_open_cb(Fl_Widget* w, void* data);
 
 void save(Fl_Widget* w, void* data);

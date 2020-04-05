@@ -45,6 +45,10 @@ void modifyCallback(Fl_Widget* w, void* data)
 void addCallback(Fl_Widget* w, void* data)
 {
 	cout << "Add Record\n";
+	vector<tuple<string, string, double>> vec
+		=	*(vector<tuple<string, string, double>>*) data;
+	vec.push_back(make_tuple
+		("addRecordFirst", "addRecordLast", 123456789));
 }
 
 //Delete Record Button Callback
@@ -71,7 +75,6 @@ vector<tuple<string, string, double>> _phonebook;
 void getVector(vector<tuple<string, string, double>>& v) {
 	_phonebook = v;
 }
-
 
 void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H) {
 	fl_push_clip(X, Y, W, H);
@@ -104,6 +107,7 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		DrawHeader(str.c_str(), X, Y, W, H);
 		return;
 	case CONTEXT_CELL: {                      // Draw data in cells
+
 		auto tp = _phonebook[ROW];
 		switch (COL) {
 		case 0: str = get<0>(tp); break;
