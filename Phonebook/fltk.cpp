@@ -49,6 +49,12 @@ void addCallback(Fl_Widget* w, void* data)
 		=	*(vector<tuple<string, string, double>>*) data;
 	vec.push_back(make_tuple
 		("addRecordFirst", "addRecordLast", 123456789));
+
+		for (auto p : vec)
+		{
+			cout << get<1>(p) << ", " << get<0>(p) << setw(40)
+					 << fixed << std::setprecision(0) << get<2>(p) << endl;
+		}
 }
 
 //Delete Record Button Callback
