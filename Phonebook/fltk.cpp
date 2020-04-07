@@ -45,7 +45,7 @@ void modifyCallback(Fl_Widget* w, void* data)
 void addCallback(Fl_Widget* w, void* data)
 {
 	cout << "Add Record\n";
-	vector<tuple<string, string, double>> vec
+	vector<tuple<string, string, double>>& vec
 		=	*(vector<tuple<string, string, double>>*) data;
 	vec.push_back(make_tuple
 		("addRecordFirst", "addRecordLast", 123456789));
