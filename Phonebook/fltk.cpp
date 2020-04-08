@@ -5,6 +5,19 @@
 
 #include "fltk.hpp"
 
+
+// DOESNT REDRAW/REFRESH  YET 
+void redraw(Fl_Widget* w, void* data)
+{
+	MyTable &table = *(MyTable*)data;
+	table.clear();
+}
+
+
+
+
+
+
 //Save function for menu dropdown bar
 void save(Fl_Widget* w, void* data)
 {

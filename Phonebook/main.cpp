@@ -50,6 +50,7 @@ int main(int argc, char** argv){
 	{ Fl_Button* addButton
 		= new Fl_Button(310, 350, 110, 25, "Add Record");
 	addButton->callback(addCallback, (void*) &_phonebook);
+	addButton->callback(redraw, (void*) &table);
 	}
 
 	//Modify Record Button

@@ -16,6 +16,7 @@
 #include <Fl/Fl_Text_Display.H>
 #include <FL/Fl_Table_Row.H>
 #include <FL/Fl_Scroll.H>
+#include <FL/Fl_Check_Button.H>
 
 #include <iostream>
 using std::cout;
@@ -77,6 +78,7 @@ void modifyCallback(Fl_Widget* w, void* data);
 void addCallback(Fl_Widget* w, void* data);
 void deleteCallback(Fl_Widget* w, void* data);
 void getVector(vector<tuple<string, string, double>>& v);
+void redraw(Fl_Widget* w, void* data);
 
 
 
