@@ -4,6 +4,72 @@
 // The Alaskan Phonebook
 #include "phonebook.hpp"
 
+void openFile(string fileName, vector<tuple<string, string, double>> &vec)
+{
+  string line;
+  string firstName;
+  string lastName;
+  double phoneNumber;
+  ifstream ifile(fileName);
+  //If file doesn't open
+  if (!ifile)
+  {
+    cout << "Couldn't open file." << endl;
+  }
+  //If file opens correctly
+  else
+  {
+    bool loop = true;
+    while (loop)
+    {
+      //If file runs to error
+      if(!ifile)
+      {
+        //If EOF end loop
+        if (ifile.eof())
+        {
+          loop = false;
+        }
+        else
+        {
+          loop = true;
+        }
+      }
+      //If file not EOF
+      else
+      {
+        getline(ifile, line);
+        istringstream iss(line);
+        if(!ifile.eof())
+        {
+          istringstream iss1(line);
+          for (int i = 0; i < 3; i++)
+          {
+            if (i == 0)
+            {
+              iss1 >> firstName;
+            }
+            else if (i == 1)
+            {
+              iss1 >> lastName;
+            }
+            else if (i == 2)
+            {
+              iss1 >> phoneNumber;
+            }
+          }
+          if (iss)
+          {
+            vec.push_back(make_tuple(firstName, lastName, phoneNumber));
+          }
+
+        }
+      }
+    }
+  }
+}
+
+
 //Prints Main Menu
 void printMenu()
 {

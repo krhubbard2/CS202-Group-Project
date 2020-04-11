@@ -4,20 +4,15 @@
 // CS202 Group Project
 // The Alaskan Phonebook
 #include "fltk.hpp"
-
+#include "phonebook.hpp"
 
 
 int main(int argc, char** argv){
 
 	vector<tuple<string, string, double>> _phonebook;
 
+	openFile("save.txt", _phonebook);
 
-
-	//Sample entrys
-  _phonebook.push_back(make_tuple("BTestF", "BTestL", 3607029067));
-	_phonebook.push_back(make_tuple("DTestF", "DTestL", 3607029061));
-	_phonebook.push_back(make_tuple("ATestF", "ATestL", 3607029066));
-	_phonebook.push_back(make_tuple("CTestF", "CTestL", 3607029068));
 
 	getVector(_phonebook);
 
@@ -44,13 +39,14 @@ int main(int argc, char** argv){
 	{ Fl_Button* searchButton
 		= new Fl_Button(30, 350, 110, 25, "Search Record");
 	searchButton->callback(searchCallback);
+searchButton->callback(redraw, (void*) &table);
 	}
 
 	//Add Record Button
 	{ Fl_Button* addButton
 		= new Fl_Button(310, 350, 110, 25, "Add Record");
 	addButton->callback(addCallback, (void*) &_phonebook);
-	addButton->callback(redraw, (void*) &table);
+	// addButton->callback(redraw, (void*) &table);
 	}
 
 	//Modify Record Button

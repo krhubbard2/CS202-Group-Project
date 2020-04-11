@@ -43,6 +43,9 @@ using std::find_if;
 // P R O T O T Y P E S ///////////////////////////////
 //////////////////////////////////////////////////////
 
+//Opens and imports saved entries
+void openFile(string fileName, vector<tuple<string, string, double>> &vec);
+
 //Displays main menu
 void printMenu();
 

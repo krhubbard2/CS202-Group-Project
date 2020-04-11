@@ -6,11 +6,11 @@
 #include "fltk.hpp"
 
 
-// DOESNT REDRAW/REFRESH  YET 
+// DOESNT REDRAW/REFRESH  YET
 void redraw(Fl_Widget* w, void* data)
 {
 	MyTable &table = *(MyTable*)data;
-	table.clear();
+	table.draw();
 }
 
 
