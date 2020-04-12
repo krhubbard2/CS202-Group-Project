@@ -4,7 +4,7 @@
 // The Alaskan Phonebook
 
 #include "fltk.hpp"
-
+#include "phonebook.hpp"
 
 // DOESNT REDRAW/REFRESH  YET
 void redraw(Fl_Widget* w, void* data)
@@ -69,6 +69,13 @@ void addCallback(Fl_Widget* w, void* data)
 //Delete Record Button Callback
 void deleteCallback(Fl_Widget* w, void* data)
 {
+	auto t = (MyTable*)data;
+	std::cout << t->callback_row() << std::endl;
+	std::cout << t->getRecord(t->callback_row());
+	t->deletePb(t->callback_row());
+	t->rows((t->rows() - 1));
+
+	t->printAll();
 
 	cout << "Delete Record\n";
 }
@@ -86,12 +93,6 @@ void quit(Fl_Widget* w, void* data)
 	// exit(0);
 }
 
-vector<tuple<string, string, double>> _phonebook;
-
-void getVector(vector<tuple<string, string, double>>& v) {
-	_phonebook = v;
-}
-
 void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H) {
 	fl_push_clip(X, Y, W, H);
 	fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, row_header_color());
@@ -101,7 +102,6 @@ void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H) {
 }
 
 void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , int W , int H) {
-	std::cout << __FUNCTION__ << "\t" << COL << std::endl;
 	string str;
 	switch (context) {
 	case CONTEXT_STARTPAGE:                   // before page is drawn..
@@ -122,7 +122,7 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		return;
 	case CONTEXT_CELL: {                      // Draw data in cells
 
-		auto tp = _phonebook[ROW];
+		auto tp = _pb.getTuple(ROW);
 		switch (COL) {
 		case 0: str = get<0>(tp); break;
 		case 1: str = get<1>(tp); break;

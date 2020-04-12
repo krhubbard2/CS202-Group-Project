@@ -3,24 +3,24 @@
 // Chaluunbat Purev
 // CS202 Group Project
 // The Alaskan Phonebook
+
 #include "fltk.hpp"
 #include "phonebook.hpp"
 
 
 int main(int argc, char** argv){
 
-	vector<tuple<string, string, double>> _phonebook;
 
-	openFile("save.txt", _phonebook);
+	Phonebook pb;
 
-
-	getVector(_phonebook);
+	pb.openFile("save.txt");
 
 	//Main Window
 	Fl_Double_Window* window = new Fl_Double_Window(605, 405, "Alaskan Phonebook");
 
 	//Table to display data
-	MyTable table(25, 45, 530, 275, _phonebook.size());
+	MyTable table(25, 45, 530, 275, pb.size());
+	table.setPb(pb);
 
 	//Drop down menu bar
 	{ Fl_Menu_Bar* menuBar
@@ -45,7 +45,7 @@ searchButton->callback(redraw, (void*) &table);
 	//Add Record Button
 	{ Fl_Button* addButton
 		= new Fl_Button(310, 350, 110, 25, "Add Record");
-	addButton->callback(addCallback, (void*) &_phonebook);
+	addButton->callback(addCallback, (void*) &pb);
 	// addButton->callback(redraw, (void*) &table);
 	}
 
@@ -58,7 +58,7 @@ searchButton->callback(redraw, (void*) &table);
 	//Delete Record Button
 	{ Fl_Button* deleteButton
 		= new Fl_Button(445, 350, 110, 25, "Delete Record");
-	deleteButton->callback(deleteCallback);
+	deleteButton->callback(deleteCallback, (void*) &table);
 	}
 
 

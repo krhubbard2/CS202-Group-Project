@@ -63,7 +63,13 @@ public:
 		end();                      // end the Fl_Table group
 
 	}
+	void setPb(const Phonebook& v_){ _pb = v_; }
+	void deletePb(const int& num) { _pb.deleteRecord(num); }
+	double getRecord(const int& num) const { return get<2>(_pb.getTuple(num)); }
+	void printAll() const { _pb.printRecords(); }
 	~MyTable() { }
+private:
+	Phonebook _pb;
 };
 
 void file_open_cb(Fl_Widget* w, void* data);
@@ -77,7 +83,6 @@ void searchCallback(Fl_Widget* w, void* data);
 void modifyCallback(Fl_Widget* w, void* data);
 void addCallback(Fl_Widget* w, void* data);
 void deleteCallback(Fl_Widget* w, void* data);
-void getVector(vector<tuple<string, string, double>>& v);
 void redraw(Fl_Widget* w, void* data);
 
 
