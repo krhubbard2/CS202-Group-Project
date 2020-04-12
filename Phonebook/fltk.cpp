@@ -14,10 +14,6 @@ void redraw(Fl_Widget* w, void* data)
 }
 
 
-
-
-
-
 //Save function for menu dropdown bar
 void save(Fl_Widget* w, void* data)
 {
@@ -73,6 +69,7 @@ void addCallback(Fl_Widget* w, void* data)
 //Delete Record Button Callback
 void deleteCallback(Fl_Widget* w, void* data)
 {
+
 	cout << "Delete Record\n";
 }
 
@@ -106,8 +103,6 @@ void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H) {
 void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , int W , int H) {
 	std::cout << __FUNCTION__ << "\t" << COL << std::endl;
 	string str;
-	if(context == CONTEXT_STARTPAGE)
-		std::cout << "THIS IS COL" << str << std::endl;
 	switch (context) {
 	case CONTEXT_STARTPAGE:                   // before page is drawn..
 		fl_font(FL_HELVETICA, 16);              // set the font for our drawing operations
@@ -134,10 +129,18 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		case 2: str = std::to_string(get<2>(tp)); str.resize(10); break;
 		default: str = "Unknown cell";
 		}
-		// Handle coloring of cells
-		fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, FL_WHITE);
-		fl_color(FL_BLACK);
-		fl_draw(str.c_str(), X, Y, W, H, FL_ALIGN_CENTER);
+		if (row_selected(ROW)) {
+			fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, FL_BLUE);
+			fl_color(FL_WHITE);
+			fl_draw(str.c_str(), X, Y, W, H, FL_ALIGN_CENTER);
+
+		}
+		else {
+			// Handle coloring of cells
+			fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, FL_WHITE);
+			fl_color(FL_BLACK);
+			fl_draw(str.c_str(), X, Y, W, H, FL_ALIGN_CENTER);
+		}
 		return;
 	}
 	default:
