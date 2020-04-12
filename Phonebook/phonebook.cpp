@@ -10,6 +10,7 @@ size_t Phonebook::size() const { return _phonebook.size(); }
 void Phonebook::deleteRecord(const int& n) {
 	_phonebook.erase(_phonebook.begin() + n);
 }
+
 void Phonebook::openFile(const string& fileName)
 {
   string line;

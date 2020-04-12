@@ -53,17 +53,24 @@ void modifyCallback(Fl_Widget* w, void* data)
 //Add Record Button Callback
 void addCallback(Fl_Widget* w, void* data)
 {
-	cout << "Add Record\n";
-	vector<tuple<string, string, double>>& vec
-		=	*(vector<tuple<string, string, double>>*) data;
-	vec.push_back(make_tuple
-		("addRecordFirst", "addRecordLast", 123456789));
+	//Get the table
+	auto t = (MyTable*)data;
 
-		for (auto p : vec)
-		{
-			cout << get<1>(p) << ", " << get<0>(p) << setw(40)
-					 << fixed << std::setprecision(0) << get<2>(p) << endl;
-		}
+
+	cout << "Add Record\n";
+
+	//
+	// cout << "Add Record\n";
+	// vector<tuple<string, string, double>>& vec
+	// 	=	*(vector<tuple<string, string, double>>*) data;
+	// vec.push_back(make_tuple
+	// 	("addRecordFirst", "addRecordLast", 123456789));
+	//
+	// 	for (auto p : vec)
+	// 	{
+	// 		cout << get<1>(p) << ", " << get<0>(p) << setw(40)
+	// 				 << fixed << std::setprecision(0) << get<2>(p) << endl;
+	// 	}
 }
 
 //Delete Record Button Callback

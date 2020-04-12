@@ -39,14 +39,13 @@ int main(int argc, char** argv){
 	{ Fl_Button* searchButton
 		= new Fl_Button(30, 350, 110, 25, "Search Record");
 	searchButton->callback(searchCallback);
-searchButton->callback(redraw, (void*) &table);
 	}
 
 	//Add Record Button
 	{ Fl_Button* addButton
 		= new Fl_Button(310, 350, 110, 25, "Add Record");
 	addButton->callback(addCallback, (void*) &pb);
-	// addButton->callback(redraw, (void*) &table);
+
 	}
 
 	//Modify Record Button
