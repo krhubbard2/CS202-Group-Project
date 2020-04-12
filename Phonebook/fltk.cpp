@@ -69,14 +69,17 @@ void addCallback(Fl_Widget* w, void* data)
 //Delete Record Button Callback
 void deleteCallback(Fl_Widget* w, void* data)
 {
+	//Get the table
 	auto t = (MyTable*)data;
-	std::cout << t->callback_row() << std::endl;
-	std::cout << t->getRecord(t->callback_row());
+
+	//Delete a record/row
 	t->deletePb(t->callback_row());
+
+	//Decrease the tables row by one
 	t->rows((t->rows() - 1));
 
+	//Testing prints to console
 	t->printAll();
-
 	cout << "Delete Record\n";
 }
 
