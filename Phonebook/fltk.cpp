@@ -18,7 +18,7 @@ void redraw(Fl_Widget* w, void* data)
 void save(Fl_Widget* w, void* data)
 {
 	auto p = (Phonebook*)data;
-	p->saveFile("save1.txt");
+	p->saveFile("save.txt");
 }
 
 //Open function for menu dropdown bar
