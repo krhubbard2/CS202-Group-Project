@@ -26,9 +26,9 @@ int main(int argc, char** argv){
 	{ Fl_Menu_Bar* menuBar
 		= new Fl_Menu_Bar(0, 0, 85, 25);
 	//When selected runs "open()" in fltk.cpp
-	menuBar->add("File/Open", FL_CTRL + 'o', open, (void*) &pb);
+	menuBar->add("File/Open", FL_CTRL + 'o', open, (void*) &table);
 	//When selected runs "save()" in fltk.cpp
-	menuBar->add("File/Save", FL_CTRL + 's', save, (void*) &pb);
+	menuBar->add("File/Save", FL_CTRL + 's', save, (void*) &table);
 	//When selected runs "quit()" in fltk.cpp
 	menuBar->add("File/Quit", FL_CTRL + 'q', quit);
 	//When selected runs "help()" in fltk.cpp

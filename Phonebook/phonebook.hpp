@@ -67,6 +67,7 @@ public:
 	//Deletes record (implements deleteRecord(F,L,P))
 	void deleteRecord(const int& n);
 
+	void setPhonebook(vector<tuple<string, string, double>> v_) {_phonebook = v_; }
 
 
 	////Sorts all current records by last name

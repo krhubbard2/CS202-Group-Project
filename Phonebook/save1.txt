@@ -1,9 +1,0 @@
-BTestF BTestL 3.60702907e+09
-DTestF DTestL 3.60702906e+09
-ATestF ATestL 3.60702907e+09
-CTestF CTestL 3.60702907e+09
-Betty Blalock 8.47988308e+09
-Lucy Robles 7.18760783e+09
-Linda Dominguez 5.09840791e+09
-Irma Elias 5.70675068e+09
-Yael Adkins 8.45296501e+09

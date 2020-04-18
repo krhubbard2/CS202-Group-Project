@@ -63,6 +63,7 @@ public:
 		end();                      // end the Fl_Table group
 
 	}
+	void saveFile(const string& fileName);
 	void setPb(const Phonebook& v_){ _pb = v_; }
 	void deletePb(const int& num) { _pb.deleteRecord(num); }
 	double getRecord(const int& num) const { return get<2>(_pb.getTuple(num)); }

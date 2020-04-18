@@ -13,12 +13,29 @@ void redraw(Fl_Widget* w, void* data)
 	table.draw();
 }
 
+void MyTable::saveFile(const string& fileName)
+{
+
+	ofstream ifile(fileName);
+	if (ifile.is_open())
+	{
+		for (auto i = 0; i < _pb.size(); i++)
+		{
+			string fname, lname;
+			double phone;
+			fname = get<0>(_pb.getTuple(i));
+			lname = get<1>(_pb.getTuple(i));
+			phone = get<2>(_pb.getTuple(i));
+			ifile << fname << " " << lname << " " << setprecision(9) << phone << endl;
+		}
+	}
+}
 
 //Save function for menu dropdown bar
 void save(Fl_Widget* w, void* data)
 {
-	auto p = (Phonebook*)data;
-	p->saveFile("save.txt");
+	auto t = (MyTable*)data;
+	t->saveFile("save.txt");
 }
 
 //Open function for menu dropdown bar
