@@ -49,9 +49,9 @@ int main(int argc, char** argv){
 	}
 
 	//Modify Record Button
-	{ Fl_Button* modifyButton
-		= new Fl_Button(170, 350, 110, 25, "Modify Record");
-	modifyButton->callback(modifyCallback);
+	{ Fl_Check_Button* modifyButton
+		= new Fl_Check_Button(170, 350, 110, 25, "Modify Record");
+	modifyButton->callback(modifyCallback, (void*)&table);
 	}
 
 	//Delete Record Button

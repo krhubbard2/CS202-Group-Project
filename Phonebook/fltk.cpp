@@ -68,6 +68,13 @@ void searchCallback(Fl_Widget* w, void* data)
 void modifyCallback(Fl_Widget* w, void* data)
 {
 	cout << "Modify Record\n";
+
+	//Get the table
+	auto t = (MyTable*)data;
+
+	t->modifyState();
+
+	
 }
 
 //Add Record Button Callback
@@ -103,7 +110,7 @@ void deleteCallback(Fl_Widget* w, void* data)
 	//Delete a record/row
 	t->deletePb(t->callback_row());
 
-	//Decrease the tables row by one
+	//Decrease the tables row by one	
 	t->rows((t->rows() - 1));
 
 	//Testing prints to console
@@ -125,6 +132,7 @@ void quit(Fl_Widget* w, void* data)
 }
 
 void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H) {
+	fl_font(FL_HELVETICA, 16);
 	fl_push_clip(X, Y, W, H);
 	fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, row_header_color());
 	fl_color(FL_BLACK);
@@ -133,6 +141,7 @@ void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H) {
 }
 
 void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , int W , int H) {
+	
 	string str;
 	switch (context) {
 	case CONTEXT_STARTPAGE:                   // before page is drawn..
@@ -152,6 +161,9 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		DrawHeader(str.c_str(), X, Y, W, H);
 		return;
 	case CONTEXT_CELL: {                      // Draw data in cells
+		// don't draw this cell if it's being edited
+		if (context_edit == context && ROW == row_edit && COL == col_edit && input->visible())
+			return;
 
 		auto tp = _pb.getTuple(ROW);
 		switch (COL) {
@@ -160,21 +172,109 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		case 2: str = std::to_string(get<2>(tp)); str.resize(10); break;
 		default: str = "Unknown cell";
 		}
+		//if(modify)
+		//If row is selected indicate that it is selected by changing color
 		if (row_selected(ROW)) {
+			fl_font(FL_HELVETICA, 16);
 			fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, FL_BLUE);
 			fl_color(FL_WHITE);
 			fl_draw(str.c_str(), X, Y, W, H, FL_ALIGN_CENTER);
 
 		}
-		else {
+		else 
 			// Handle coloring of cells
-			fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, FL_WHITE);
-			fl_color(FL_BLACK);
-			fl_draw(str.c_str(), X, Y, W, H, FL_ALIGN_CENTER);
-		}
+			DrawHeader(str.c_str(), X, Y, W, H);
 		return;
 	}
 	default:
 		return;
 	}
+}
+
+void MyTable::cell_event() {
+	int R = callback_row();
+	int C = callback_col();
+	TableContext context = callback_context();
+
+	switch (context) {
+	case CONTEXT_CELL: {                                // A table event occurred on a cell
+		switch (Fl::event()) {                            // see what FLTK event caused it
+		case FL_PUSH:                                   // mouse click?
+			done_editing();                               // finish editing previous
+			start_editing(context, R, C);
+			return;
+
+		case FL_KEYBOARD:                               // key press in table?
+			if (Fl::event_key() == FL_Escape) exit(0);  // ESC closes app
+			done_editing();                               // finish any previous editing
+			if (C == cols() - 1 || R == rows() - 1) return;       // no editing of totals column
+			switch (Fl::e_text[0]) {
+			case '0': case '1': case '2': case '3':     // any of these should start editing new cell
+			case '4': case '5': case '6': case '7':
+			case '8': case '9': case '+': case '-':
+				start_editing(context, R, C);
+				input->handle(Fl::event());               // pass typed char to input
+				break;
+			case '\r': case '\n':                       // let enter key edit the cell
+				start_editing(context, R, C);
+				break;
+			}
+			return;
+		}
+		return;
+	}
+
+	case CONTEXT_TABLE:                                 // A table event occurred on dead zone in table
+		done_editing();                                   // done editing, hide
+		return;
+
+	default:
+		return;
+	}
+}
+
+void MyTable::start_editing(TableContext context, int R, int C) {
+	// Keep track of cell being edited
+	context_edit = context;
+
+	string cell_value;
+	switch (C) {
+	case 0: cell_value = get<0>(_pb.getTuple(R)); break;
+	case 1: cell_value = get<1>(_pb.getTuple(R)); break;
+	case 2: cell_value = std::to_string(get<2>(_pb.getTuple(R))); break;
+	default: return;
+	}
+
+	// Find X/Y/W/H of cell
+	int X, Y, W, H;
+	find_cell(context, R, C, X, Y, W, H);
+	input->resize(X, Y, W, H);                             // Move Fl_Input widget there
+	switch (context) {
+	case CONTEXT_CELL:
+		input->value(cell_value.c_str()); break;
+	default: // shouldn't happen
+		input->value("?");
+		break;
+	}
+	input->position(0, strlen(input->value()));          // Select entire input field
+	input->show();                                      // Show the input widget, now that we've positioned it
+	input->take_focus();
+}
+
+void MyTable::done_editing() {
+	if (input->visible()) {                             // input widget visible, ie. edit in progress?
+		set_value_hide();                                 // Transfer its current contents to cell and hide
+	}
+}
+
+void MyTable::set_value_hide() {
+
+	auto t = _pb.getTuple(row_edit);
+
+	std::cout << get<0>(t) << " "
+		<< get<1>(t) << " "
+		<< get<2>(t) << " ";
+
+	input->hide();
+	window()->cursor(FL_CURSOR_DEFAULT);                // if we don't do this, cursor can disappear!
 }
