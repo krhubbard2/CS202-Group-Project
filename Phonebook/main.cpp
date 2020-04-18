@@ -26,9 +26,9 @@ int main(int argc, char** argv){
 	{ Fl_Menu_Bar* menuBar
 		= new Fl_Menu_Bar(0, 0, 85, 25);
 	//When selected runs "open()" in fltk.cpp
-	menuBar->add("File/Open", FL_CTRL + 'o', open);
+	menuBar->add("File/Open", FL_CTRL + 'o', open, (void*) &pb);
 	//When selected runs "save()" in fltk.cpp
-	menuBar->add("File/Save", FL_CTRL + 's', save);
+	menuBar->add("File/Save", FL_CTRL + 's', save, (void*) &pb);
 	//When selected runs "quit()" in fltk.cpp
 	menuBar->add("File/Quit", FL_CTRL + 'q', quit);
 	//When selected runs "help()" in fltk.cpp
@@ -44,7 +44,7 @@ int main(int argc, char** argv){
 	//Add Record Button
 	{ Fl_Button* addButton
 		= new Fl_Button(310, 350, 110, 25, "Add Record");
-	addButton->callback(addCallback, (void*) &pb);
+	addButton->callback(addCallback, (void*) &table);
 
 	}
 

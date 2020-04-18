@@ -49,6 +49,9 @@ public:
 	//Opens and imports saved entries
 	void openFile(const string& fileName);
 
+	//Saves entries for importing later
+	void saveFile(const string& fileName);
+
 	//Displays main menu
 	void printMenu();
 
@@ -63,6 +66,8 @@ public:
 
 	//Deletes record (implements deleteRecord(F,L,P))
 	void deleteRecord(const int& n);
+
+
 
 	////Sorts all current records by last name
 	//bool sortVec(const tuple<string, string, double>& a,

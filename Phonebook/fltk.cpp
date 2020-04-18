@@ -17,13 +17,16 @@ void redraw(Fl_Widget* w, void* data)
 //Save function for menu dropdown bar
 void save(Fl_Widget* w, void* data)
 {
-	cout << "Save" << endl;
+	auto p = (Phonebook*)data;
+	p->saveFile("save1.txt");
 }
 
 //Open function for menu dropdown bar
 void open(Fl_Widget* w, void* data)
 {
 	cout << "Open" << endl;
+	auto p =(Phonebook*)data;
+	p->openFile("save.txt");
 }
 
 //Help function for menu dropdown bar
@@ -54,7 +57,8 @@ void modifyCallback(Fl_Widget* w, void* data)
 void addCallback(Fl_Widget* w, void* data)
 {
 	//Get the table
-	auto t = (MyTable*)data;
+	//auto t = (MyTable*)data;
+	//t->rows((t->rows() +1));
 
 
 	cout << "Add Record\n";

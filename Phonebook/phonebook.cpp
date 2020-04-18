@@ -11,6 +11,23 @@ void Phonebook::deleteRecord(const int& n) {
 	_phonebook.erase(_phonebook.begin() + n);
 }
 
+void Phonebook::saveFile(const string& fileName)
+{
+	ofstream ifile(fileName);
+	if (ifile.is_open())
+	{
+		for (int i = 0; i < _phonebook.size(); i++)
+		{
+			string fname, lname;
+			double phone;
+			fname = get<0>(_phonebook[i]);
+			lname = get<1>(_phonebook[i]);
+			phone = get<2>(_phonebook[i]);
+			ifile << fname << " " << lname << " " << phone << endl;
+		}
+	}
+}
+
 void Phonebook::openFile(const string& fileName)
 {
   string line;
