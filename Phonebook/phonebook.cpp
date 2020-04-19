@@ -5,6 +5,15 @@
 #include "phonebook.hpp"
 
 tuple<string, string, double> Phonebook::getTuple(const int& n) const { return _phonebook[n]; }
+void Phonebook::setTuple(int R, int C, std::string str) {
+	auto t = &_phonebook[R];
+
+	switch (C) {
+	case 0: get<0>(*t) = str; break;
+	case 1: get<1>(*t) = str; break;
+	case 2: get<2>(*t) = std::stoi(str); break;
+	}
+}
 size_t Phonebook::size() const { return _phonebook.size(); }
 
 void Phonebook::deleteRecord(const int& n) {

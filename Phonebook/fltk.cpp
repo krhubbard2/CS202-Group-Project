@@ -131,10 +131,10 @@ void quit(Fl_Widget* w, void* data)
 	// exit(0);
 }
 
-void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H) {
+void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H, const Fl_Color c) {
 	fl_font(FL_HELVETICA, 16);
 	fl_push_clip(X, Y, W, H);
-	fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, row_header_color());
+	fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, c);
 	fl_color(FL_BLACK);
 	fl_draw(s, X, Y, W, H, FL_ALIGN_CENTER);
 	fl_pop_clip();
@@ -154,11 +154,11 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		case 2: str = "Phone Number"; break;
 		default: str = "Unknown column";
 		}
-		DrawHeader(str.c_str(), X, Y, W, H);
+		DrawHeader(str.c_str(), X, Y, W, H, FL_GRAY);
 		return;
 	case CONTEXT_ROW_HEADER:                  // Draw row headers
 		str = std::to_string(ROW + 1);
-		DrawHeader(str.c_str(), X, Y, W, H);
+		DrawHeader(str.c_str(), X, Y, W, H, FL_GRAY);
 		return;
 	case CONTEXT_CELL: {                      // Draw data in cells
 		// don't draw this cell if it's being edited
@@ -172,18 +172,35 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		case 2: str = std::to_string(get<2>(tp)); str.resize(10); break;
 		default: str = "Unknown cell";
 		}
-		//if(modify)
-		//If row is selected indicate that it is selected by changing color
-		if (row_selected(ROW)) {
-			fl_font(FL_HELVETICA, 16);
-			fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, FL_BLUE);
-			fl_color(FL_WHITE);
-			fl_draw(str.c_str(), X, Y, W, H, FL_ALIGN_CENTER);
+		if (!modify) {
+			//If row is selected indicate that it is selected by changing color
+			if (row_selected(ROW)) {
+				fl_font(FL_HELVETICA, 16);
+				fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, FL_BLUE);
+				fl_color(FL_WHITE);
+				fl_draw(str.c_str(), X, Y, W, H, FL_ALIGN_CENTER);
 
+			}
+			else
+				// Handle coloring of cells
+				DrawHeader(str.c_str(), X, Y, W, H, FL_WHITE);
 		}
-		else 
-			// Handle coloring of cells
-			DrawHeader(str.c_str(), X, Y, W, H);
+		else {
+
+			callback(&event_callback, (void*)this);
+			// Background
+			int highlight = is_selected(ROW, COL) && context == context_edit;
+			fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, highlight ? FL_BLUE : FL_WHITE);
+			// Text
+			fl_font(FL_HELVETICA, 16);
+			
+			fl_push_clip(X + 3, Y + 3, W - 6, H - 6);
+			{
+				fl_color(FL_BLACK);
+				fl_draw(str.c_str(), X + 3, Y + 3, W - 6, H - 6, FL_ALIGN_CENTER);
+			}
+			fl_pop_clip();
+		}
 		return;
 	}
 	default:
@@ -236,6 +253,8 @@ void MyTable::cell_event() {
 void MyTable::start_editing(TableContext context, int R, int C) {
 	// Keep track of cell being edited
 	context_edit = context;
+	row_edit = R;
+	col_edit = C;
 
 	string cell_value;
 	switch (C) {
@@ -269,11 +288,9 @@ void MyTable::done_editing() {
 
 void MyTable::set_value_hide() {
 
-	auto t = _pb.getTuple(row_edit);
+	_pb.setTuple(row_edit, col_edit, input->value());
 
-	std::cout << get<0>(t) << " "
-		<< get<1>(t) << " "
-		<< get<2>(t) << " ";
+	cout << input->value() << "\t" << col_edit << endl;
 
 	input->hide();
 	window()->cursor(FL_CURSOR_DEFAULT);                // if we don't do this, cursor can disappear!

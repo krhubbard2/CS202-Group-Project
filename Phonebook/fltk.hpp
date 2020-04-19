@@ -51,7 +51,7 @@ public:
 	TableContext context_edit;                            // context being edited (row head/col head/cell)
 	// Draw the row/col headings
 	//    Make this a dark thin upbox with the text inside. 
-	void DrawHeader(const char* s, int X, int Y, int W, int H);
+	void DrawHeader(const char* s, int X, int Y, int W, int H, const Fl_Color c);
 
 	// Handle drawing table's cells
 	//     Fl_Table calls this function to draw each visible cell in the table.
@@ -74,8 +74,6 @@ public:
 	// Constructor
 	//     Make our data array, and initialize the table options.
 	MyTable(int X, int Y, int W, int H, int s, const char* L = 0) : Fl_Table_Row(X, Y, W, H, L) {
-		
-		callback(&event_callback, (void*)this);
 		when(FL_WHEN_NOT_CHANGED | when());
 		// Create input widget that we'll use whenever user clicks on a cell
 		input = new Fl_Input(W / 2, H / 2, 0, 0);

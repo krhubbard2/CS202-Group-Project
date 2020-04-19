@@ -42,7 +42,11 @@ public:
 	Phonebook(const vector<tuple<string, string, double>>& phonebook) : _phonebook(phonebook) {}
 	Phonebook() {}
 
+	//Return ROW/Tuple
 	tuple<string, string, double> getTuple(const int& n) const;
+	
+	//Edit ROW/Tuple
+	void setTuple(int R, int C, std::string str);
 
 	size_t size() const;
 
