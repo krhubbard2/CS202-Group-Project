@@ -41,6 +41,7 @@ void Phonebook::saveFile(const string& fileName)
 
 void Phonebook::openFile(const string& fileName)
 {
+	_phonebook.clear();
   string line;
   string firstName;
   string lastName;
