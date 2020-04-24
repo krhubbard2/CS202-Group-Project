@@ -19,6 +19,8 @@
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Check_Button.H>
+#include <FL/Fl_File_Chooser.H>
+#include <FL/Fl_Output.H>
 
 #include <iostream>
 using std::cout;
@@ -97,6 +99,7 @@ public:
 		row_edit = col_edit = 0;
 
 	}
+	void openFileFLTK(string fileName);
 	void addPb(string& first, string& last, double& phone);
 	void saveFile(const string& fileName);
 	void setPb(const Phonebook& v_){ _pb = v_; }
@@ -123,6 +126,7 @@ void addCallback(Fl_Widget* w, void* data);
 void deleteCallback(Fl_Widget* w, void* data);
 void redraw(Fl_Widget* w, void* data);
 void submitCallback(Fl_Widget* w, void* data);
+void submitFile(Fl_Widget* w, void* data);
 
 
 #endif

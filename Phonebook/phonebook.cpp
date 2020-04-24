@@ -104,19 +104,6 @@ void Phonebook::openFile(const string& fileName)
   }
 }
 
-
-//Prints Main Menu
-void Phonebook::printMenu()
-{
-  cout << "1) Add telephone record" << endl;
-  cout << "2) Show records" << endl;
-  cout << "3) Modify record" << endl;
-  cout << "4) Search telephone record" << endl;
-  cout << "5) Delete record" << endl;
-  cout << "6) Exit" << endl;
-}
-
-
 //Adds record to existing Vector
 void Phonebook::addRecord(string first, string last, double phone)
 {

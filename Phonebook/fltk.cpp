@@ -6,12 +6,7 @@
 #include "fltk.hpp"
 #include "phonebook.hpp"
 
-// DOESNT REDRAW/REFRESH  YET
-void redraw(Fl_Widget* w, void* data)
-{
-	MyTable &table = *(MyTable*)data;
-	table.draw();
-}
+string userFile = "";
 
 void MyTable::saveFile(const string& fileName)
 {
@@ -38,13 +33,69 @@ void save(Fl_Widget* w, void* data)
 	t->saveFile("save.txt");
 }
 
+
 //Open function for menu dropdown bar
 void open(Fl_Widget* w, void* data)
 {
-	cout << "Open" << endl;
-	auto p =(Phonebook*)data;
-	p->openFile("save.txt");
+	auto t = (MyTable*)data;
+
+	// Create the file chooser, and show it (TSP filter applied)
+ Fl_File_Chooser chooser(".",                        // directory
+												 "*.txt",                        // filter
+												 Fl_File_Chooser::SINGLE,     // chooser type
+												 "Title Of Chooser");        // title
+ chooser.show();
+
+ // Block until user picks something.
+ //     (The other way to do this is to use a callback())
+ //
+ while(chooser.shown())
+		 { Fl::wait(); }
+
+ // User hit cancel?
+ if ( chooser.value() == NULL )
+		 { fprintf(stderr, "(User hit 'Cancel')\n"); return; }
+
+ // Print what the user picked
+ fprintf(stderr, "--------------------\n");
+ fprintf(stderr, "DIRECTORY: '%s'\n", chooser.directory());
+ fprintf(stderr, "    VALUE: '%s'\n", chooser.value());
+ fprintf(stderr, "    COUNT: %d files selected\n", chooser.count());
+
+ // Choice = selected value
+ string choice = chooser.value();
+ std::istringstream is(choice);
+ //Apply user choice to global variable userFile
+ is >> userFile;
+
+//Prompt file open confirmation
+Fl_Window* window = new Fl_Window(540, 135, "Confirm File Selection");
+Fl_Button* button = new Fl_Button(195, 70, 175, 40, "Submit");
+Fl_Output* out = new Fl_Output(95, 25, 430, 25, "File Selected: ");
+
+window->show();
+
+//Callback for submit
+button->callback(submitFile, (void*) &t);
+//Show file selection
+out->value(userFile.c_str());
 }
+
+//run openFile on selected file
+void submitFile(Fl_Widget* w, void* data){
+	auto p =(MyTable*)data;
+	p->openFileFLTK(userFile);
+	Fl_Window* a = (Fl_Window*) w;
+	//Hide submit file window
+	a->hide();
+	cout << userFile;
+}
+
+
+void MyTable::openFileFLTK(string fileName){
+	_pb.openFile(fileName);
+}
+
 
 //Help function for menu dropdown bar
 void help(Fl_Widget* w, void* data)
@@ -81,6 +132,7 @@ void modifyCallback(Fl_Widget* w, void* data)
 
 }
 
+//Callback function for add record submit button
 void submitCallback(Fl_Widget* w, void* data){
 	auto table = (MyTable*)data;
 
@@ -100,7 +152,8 @@ void submitCallback(Fl_Widget* w, void* data){
 	//If proper phone entry
 	if (iss)
 	{
-		// table->addPb(first, last, phone);
+		table->addPb(first, last, phone);
+
 		//Hide add record window
 		Fl_Window* win = (Fl_Window*)b->parent();
 		win->hide();
@@ -120,6 +173,7 @@ void addCallback(Fl_Widget* w, void* data){
 	//Get the table
 	auto t = (MyTable*)data;
 
+	//Pop up window to add new entry
 	Fl_Window* addRecordWindow = new Fl_Window(540, 225, "Add Record");
 	Fl_Box* firstNameBox = new Fl_Box(50, 15, 75, 25, "First Name");
 	Fl_Box* lastNameBox = new Fl_Box(190, 15, 75, 25, "Last Name");
@@ -128,6 +182,7 @@ void addCallback(Fl_Widget* w, void* data){
 	Fl_Input* lastNameInput = new Fl_Input(185, 50, 95, 40);
 	Fl_Input* phoneNumberInput = new Fl_Input(330, 50, 175, 40);
 	Fl_Button* submitButton = new  Fl_Button(175, 135, 165, 60, "Submit");
+	//On button press run submitCallback
 	submitButton->callback(submitCallback, (void*) &t);
 
 
