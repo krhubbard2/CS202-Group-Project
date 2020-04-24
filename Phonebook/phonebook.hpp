@@ -36,7 +36,6 @@ using std::sort;
 using std::find;
 using std::find_if;
 
-
 class Phonebook {
 public:
 	Phonebook(const vector<tuple<string, string, double>>& phonebook) : _phonebook(phonebook) {}
@@ -44,7 +43,7 @@ public:
 
 	//Return ROW/Tuple
 	tuple<string, string, double> getTuple(const int& n) const;
-	
+
 	//Edit ROW/Tuple
 	void setTuple(int R, int C, std::string str);
 
@@ -60,7 +59,7 @@ public:
 	void printMenu();
 
 	//Adds a new record to vector
-	void addRecord();
+	void addRecord(string first, string last, double phone);
 
 	//Prints all current records
 	void printRecords() const;
@@ -74,8 +73,8 @@ public:
 	void setPhonebook(vector<tuple<string, string, double>> v_) {_phonebook = v_; }
 
 
-	////Sorts all current records by last name
-	//bool sortVec(const tuple<string, string, double>& a,
+	//Sorts all current records by last name
+//	bool sortVec(const tuple<string, string, double>& a,
 	//	const tuple<string, string, double>& b);
 	////Search records by last name
 	//void searchRecordLast(vector<tuple<string, string, double>> vec, string name);

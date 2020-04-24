@@ -5,7 +5,7 @@
 
 #ifndef FLTK_HPP_
 #define FLTK_HPP_
-#define WIN32
+//#define WIN32
 
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
@@ -50,7 +50,7 @@ public:
 	int row_edit, col_edit;                               // row/col being modified
 	TableContext context_edit;                            // context being edited (row head/col head/cell)
 	// Draw the row/col headings
-	//    Make this a dark thin upbox with the text inside. 
+	//    Make this a dark thin upbox with the text inside.
 	void DrawHeader(const char* s, int X, int Y, int W, int H, const Fl_Color c);
 
 	// Handle drawing table's cells
@@ -97,6 +97,7 @@ public:
 		row_edit = col_edit = 0;
 
 	}
+	void addPb(string& first, string& last, double& phone);
 	void saveFile(const string& fileName);
 	void setPb(const Phonebook& v_){ _pb = v_; }
 	void deletePb(const int& num) { _pb.deleteRecord(num); }
@@ -121,7 +122,7 @@ void modifyCallback(Fl_Widget* w, void* data);
 void addCallback(Fl_Widget* w, void* data);
 void deleteCallback(Fl_Widget* w, void* data);
 void redraw(Fl_Widget* w, void* data);
-
+void submitCallback(Fl_Widget* w, void* data);
 
 
 #endif

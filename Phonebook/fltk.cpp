@@ -58,6 +58,10 @@ void quitProgram(Fl_Widget* w, void* data)
 	exit(0);
 }
 
+void MyTable::addPb(string& first, string& last, double& phone){
+	_pb.addRecord(first, last, phone);
+}
+
 //Search Record Button Callback
 void searchCallback(Fl_Widget* w, void* data)
 {
@@ -74,31 +78,66 @@ void modifyCallback(Fl_Widget* w, void* data)
 
 	t->modifyState();
 
-	
+
+}
+
+void submitCallback(Fl_Widget* w, void* data){
+	auto table = (MyTable*)data;
+
+	//Grab inputs
+	Fl_Button* b = (Fl_Button*)w;
+	Fl_Input* a = (Fl_Input*)b->parent()->child(3);
+	Fl_Input* c = (Fl_Input*)b->parent()->child(4);
+	Fl_Input* d = (Fl_Input*)b->parent()->child(5);
+	string first = a->value();
+	string last = c->value();
+	string phoneS = d->value();
+
+	istringstream iss(phoneS);
+	double phone;
+	iss >> phone;
+
+	//If proper phone entry
+	if (iss)
+	{
+		// table->addPb(first, last, phone);
+		//Hide add record window
+		Fl_Window* win = (Fl_Window*)b->parent();
+		win->hide();
+	}
+	//If improper entry
+	else{
+	Fl_Double_Window* o = new Fl_Double_Window(305, 150, "Error!");
+	Fl_Box* box = new Fl_Box(40, 35, 215, 80, "Invalid entry.");
+	o->show();
+	box->show();
+	}
+	cout << first << " " << last << " " << phone << "\n";
 }
 
 //Add Record Button Callback
-void addCallback(Fl_Widget* w, void* data)
-{
+void addCallback(Fl_Widget* w, void* data){
 	//Get the table
-	//auto t = (MyTable*)data;
-	//t->rows((t->rows() +1));
+	auto t = (MyTable*)data;
+
+	Fl_Window* addRecordWindow = new Fl_Window(540, 225, "Add Record");
+	Fl_Box* firstNameBox = new Fl_Box(50, 15, 75, 25, "First Name");
+	Fl_Box* lastNameBox = new Fl_Box(190, 15, 75, 25, "Last Name");
+	Fl_Box* phoneNumberBox = new Fl_Box(360, 15, 75, 25, "Phone Number");
+	Fl_Input* firstNameInput = new Fl_Input(45, 50, 95, 40); //child 3
+	Fl_Input* lastNameInput = new Fl_Input(185, 50, 95, 40);
+	Fl_Input* phoneNumberInput = new Fl_Input(330, 50, 175, 40);
+	Fl_Button* submitButton = new  Fl_Button(175, 135, 165, 60, "Submit");
+	submitButton->callback(submitCallback, (void*) &t);
 
 
-	cout << "Add Record\n";
 
-	//
-	// cout << "Add Record\n";
-	// vector<tuple<string, string, double>>& vec
-	// 	=	*(vector<tuple<string, string, double>>*) data;
-	// vec.push_back(make_tuple
-	// 	("addRecordFirst", "addRecordLast", 123456789));
-	//
-	// 	for (auto p : vec)
-	// 	{
-	// 		cout << get<1>(p) << ", " << get<0>(p) << setw(40)
-	// 				 << fixed << std::setprecision(0) << get<2>(p) << endl;
-	// 	}
+	addRecordWindow->show();
+	firstNameBox->show();
+	lastNameBox->show();
+	phoneNumberBox->show();
+
+
 }
 
 //Delete Record Button Callback
@@ -110,7 +149,7 @@ void deleteCallback(Fl_Widget* w, void* data)
 	//Delete a record/row
 	t->deletePb(t->callback_row());
 
-	//Decrease the tables row by one	
+	//Decrease the tables row by one
 	t->rows((t->rows() - 1));
 
 	//Testing prints to console
@@ -141,7 +180,7 @@ void MyTable::DrawHeader(const char* s, int X, int Y, int W, int H, const Fl_Col
 }
 
 void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , int W , int H) {
-	
+
 	string str;
 	switch (context) {
 	case CONTEXT_STARTPAGE:                   // before page is drawn..
@@ -193,7 +232,7 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 			fl_draw_box(FL_THIN_UP_BOX, X, Y, W, H, highlight ? FL_BLUE : FL_WHITE);
 			// Text
 			fl_font(FL_HELVETICA, 16);
-			
+
 			fl_push_clip(X + 3, Y + 3, W - 6, H - 6);
 			{
 				fl_color(FL_BLACK);
