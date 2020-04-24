@@ -6,6 +6,8 @@
 
 #include "fltk.hpp"
 #include "phonebook.hpp"
+#include <algorithm>
+using std::sort;
 
 
 int main(int argc, char** argv){
@@ -14,6 +16,7 @@ int main(int argc, char** argv){
 	Phonebook pb;
 
 	pb.openFile("save.txt");
+	sort(pb.begin(), pb.end(), sortVec);
 
 	//Main Window
 	Fl_Double_Window* window = new Fl_Double_Window(605, 405, "Alaskan Phonebook");

@@ -72,10 +72,9 @@ public:
 
 	void setPhonebook(vector<tuple<string, string, double>> v_) {_phonebook = v_; }
 
+	vector<tuple<string, string, double>>::iterator begin() { return _phonebook.begin(); }
+	vector<tuple<string, string, double>>::iterator end() { return _phonebook.end(); }
 
-	//Sorts all current records by last name
-//	bool sortVec(const tuple<string, string, double>& a,
-	//	const tuple<string, string, double>& b);
 	////Search records by last name
 	//void searchRecordLast(vector<tuple<string, string, double>> vec, string name);
 	//
@@ -92,6 +91,7 @@ private:
 	vector<tuple<string, string, double>> _phonebook;
 };
 
-
+bool sortVec(const tuple<string, string, double>& a,
+						 const tuple<string, string, double>& b);
 
 #endif
