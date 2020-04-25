@@ -9,7 +9,6 @@
 #include <algorithm>
 using std::sort;
 
-
 int main(int argc, char** argv){
 
 
@@ -43,7 +42,7 @@ int main(int argc, char** argv){
 		= new Fl_Input(340, 5, 120, 25);
 	Fl_Button* searchButton
 		= new Fl_Button(465, 5, 60, 25, "Search");
-	searchButton->callback(searchCallback, srchInp);
+	searchButton->callback(searchCallback, (void*) &table);
 	 Fl_Button* clearButton
 		= new Fl_Button(530, 5, 50, 25, "Clear");
 	 clearButton->callback(clearCallback, (void*) &table);

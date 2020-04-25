@@ -104,12 +104,13 @@ public:
 	void saveFile(const string& fileName);
 	void setPb(const Phonebook& v_){ _pb = v_; }
 	void deletePb(const int& num) { _pb.deleteRecord(num); }
-	double getRecord(const int& num) const { return get<2>(_pb.getTuple(num)); }
+	double getRecord(const int& num) const { return get<2>(_pb.getPhone(num)); }
 	void printAll() const { _pb.printRecords(); }
 	void modifyState() { modify = (modify) ? false : true; }
 	void searchState() { searching = (searching) ? false : true; }
 	bool search() const { return searching; }
 	void clearSearch() { _pb.clearSearch(); }
+	void search(std::string str) {  _pb.setSearch(str); }
 	~MyTable() { }
 private:
 	Phonebook _pb;

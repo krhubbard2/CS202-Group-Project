@@ -4,7 +4,7 @@
 // The Alaskan Phonebook
 #include "phonebook.hpp"
 
-tuple<string, string, double> Phonebook::getTuple(const int& n) const { return _phonebook[n]; }
+tuple<string, string, double> Phonebook::getPhone(const int& n) const { return _phonebook[n]; }
 void Phonebook::setPhone(int R, int C, std::string str) {
 	auto t = &_phonebook[R];
 
@@ -17,11 +17,14 @@ void Phonebook::setPhone(int R, int C, std::string str) {
 	}
 }
 
+tuple<string, string, double> Phonebook::getSearch(const int& n) const { return _searched[n]; }
+
 void Phonebook::setSearch(string& str) {
 	if (str.size() == 0)
 		return;
 
-	std::for_each(str.begin(), str.end(), [](char& c) {return std::tolower(c); });
+	std::for_each(str.begin(), str.end(), [](char& c) {c = std::tolower(c); });
+
 
 	std::string f, l, p;
 	for (auto v : _phonebook) {
@@ -29,12 +32,14 @@ void Phonebook::setSearch(string& str) {
 		l = std::get<1>(v);
 		p = std::to_string(std::get<2>(v));
 
-		std::for_each(f.begin(), f.end(), [](char& c) {return std::tolower(c); });
-		std::for_each(l.begin(), l.end(), [](char& c) {return std::tolower(c); });
+		std::for_each(f.begin(), f.end(), [](char& c) {c = std::tolower(c); });
+		std::for_each(l.begin(), l.end(), [](char& c) {c = std::tolower(c); });
 
 		if (f == str || l == str || p == str)
 			_searched.push_back(v);
 	}
+
+		
 }
 
 void Phonebook::clearSearch() {

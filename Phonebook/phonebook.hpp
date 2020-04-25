@@ -42,7 +42,8 @@ public:
 	Phonebook() {}
 
 	//Return ROW/Tuple
-	tuple<string, string, double> getTuple(const int& n) const;
+	tuple<string, string, double> getPhone(const int& n) const;
+	tuple<string, string, double> getSearch(const int& n) const;
 
 	//Edit ROW/Tuple
 	void setPhone(int R, int C, std::string str);

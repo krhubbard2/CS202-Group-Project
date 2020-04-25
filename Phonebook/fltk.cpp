@@ -18,9 +18,9 @@ void MyTable::saveFile(const string& fileName)
 		{
 			string fname, lname;
 			double phone;
-			fname = get<0>(_pb.getTuple(i));
-			lname = get<1>(_pb.getTuple(i));
-			phone = get<2>(_pb.getTuple(i));
+			fname = get<0>(_pb.getPhone(i));
+			lname = get<1>(_pb.getPhone(i));
+			phone = get<2>(_pb.getPhone(i));
 			ifile << fname << " " << lname << " " << setprecision(9) << phone << endl;
 		}
 	}
@@ -120,21 +120,29 @@ void MyTable::addPb(string& first, string& last, double& phone){
 //Search Record Button Callback
 void searchCallback(Fl_Widget* w, void* data)
 {
-	cout << "Search Record\n";
+	//Get the input value
+	Fl_Button* a = (Fl_Button*)w;
+	Fl_Input* b = (Fl_Input*)a->parent()->child(2);
 
-	Fl_Input* inp = (Fl_Input*)data;
-
+	//Search the word
+	MyTable* table = (MyTable*)data;
+	//table->searchState();
+	table->search(b->value());
 	
 }
 
 //Clear Button that refreshes the table to its normal state
 //not searched state
 void clearCallback(Fl_Widget* w, void* data) {
-	MyTable* table = (MyTable*)data;
+	//Get the input value
+	Fl_Button* a = (Fl_Button*)w;
+	Fl_Input* b = (Fl_Input*)a->parent()->child(2);
 
+	b->value(" ");
+
+	MyTable* table = (MyTable*)data;
 	if (table->search())
 		return;
-
 	table->searchState();
 	table->clearSearch();
 
@@ -278,8 +286,11 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		// don't draw this cell if it's being edited
 		if (context_edit == context && ROW == row_edit && COL == col_edit && input->visible())
 			return;
-
-		auto tp = _pb.getTuple(ROW);
+		tuple<std::string, std::string, double> tp;
+		if (!searching)
+			tp = _pb.getPhone(ROW);
+		else
+			tp = _pb.getSearch(ROW);
 		switch (COL) {
 		case 0: str = get<0>(tp); break;
 		case 1: str = get<1>(tp); break;
@@ -375,9 +386,9 @@ void MyTable::start_editing(TableContext context, int R, int C) {
 
 	string cell_value;
 	switch (C) {
-	case 0: cell_value = get<0>(_pb.getTuple(R)); break;
-	case 1: cell_value = get<1>(_pb.getTuple(R)); break;
-	case 2: cell_value = std::to_string(get<2>(_pb.getTuple(R))); break;
+	case 0: cell_value = get<0>(_pb.getPhone(R)); break;
+	case 1: cell_value = get<1>(_pb.getPhone(R)); break;
+	case 2: cell_value = std::to_string(get<2>(_pb.getPhone(R))); break;
 	default: return;
 	}
 
