@@ -39,8 +39,12 @@ int main(int argc, char** argv){
 	}
 
 	//Search Record Button
-	{ Fl_Button* searchButton
-		= new Fl_Button(30, 350, 110, 25, "Search Record");
+	{ Fl_Input* srchInp
+		= new Fl_Input(340, 5, 120, 25);
+		Fl_Button* searchButton
+		= new Fl_Button(465, 5, 60, 25, "Search!");
+	 Fl_Button* clearButton
+		= new Fl_Button(530, 5, 50, 25, "Clear");
 	 searchButton->callback(searchCallback);
 	}
 
