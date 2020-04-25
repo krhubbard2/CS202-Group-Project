@@ -45,8 +45,15 @@ public:
 	tuple<string, string, double> getTuple(const int& n) const;
 
 	//Edit ROW/Tuple
-	void setTuple(int R, int C, std::string str);
+	void setPhone(int R, int C, std::string str);
 
+	//this called when clear button pressed
+	void clearSearch();
+
+	//Search the string in all columns and populate searched with them
+	void setSearch(const string& str);
+
+	//Return size of phonebook
 	size_t size() const;
 
 	//Opens and imports saved entries
@@ -71,6 +78,7 @@ public:
 
 private:
 	vector<tuple<string, string, double>> _phonebook;
+	vector<tuple<string, string, double>> _searched;
 };
 
 bool sortVec(const tuple<string, string, double>& a,

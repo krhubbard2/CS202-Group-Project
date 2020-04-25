@@ -19,10 +19,10 @@ int main(int argc, char** argv){
 	sort(pb.begin(), pb.end(), sortVec);
 
 	//Main Window
-	Fl_Double_Window* window = new Fl_Double_Window(605, 405, "Alaskan Phonebook");
+	Fl_Double_Window* window = new Fl_Double_Window(605, 375, "Alaskan Phonebook");
 
 	//Table to display data
-	MyTable table(25, 45, 530, 275, pb.size());
+	MyTable table(25, 45, 550, 275, pb.size());
 	table.setPb(pb);
 
 	//Drop down menu bar
@@ -41,29 +41,30 @@ int main(int argc, char** argv){
 	//Search Record Button
 	{ Fl_Input* srchInp
 		= new Fl_Input(340, 5, 120, 25);
-		Fl_Button* searchButton
+	Fl_Button* searchButton
 		= new Fl_Button(465, 5, 60, 25, "Search!");
+	searchButton->callback(searchCallback, srchInp);
 	 Fl_Button* clearButton
 		= new Fl_Button(530, 5, 50, 25, "Clear");
-	 searchButton->callback(searchCallback);
+	 clearButton->callback(clearCallback, (void*) &table);
 	}
 
 	//Add Record Button
 	{ Fl_Button* addButton
-		= new Fl_Button(310, 350, 110, 25, "Add Record");
+		= new Fl_Button(310, 330, 110, 25, "Add Record");
 	addButton->callback(addCallback, (void*) &table);
 
 	}
 
 	//Modify Record Button
 	{ Fl_Check_Button* modifyButton
-		= new Fl_Check_Button(170, 350, 110, 25, "Modify Record");
+		= new Fl_Check_Button(170, 5, 110, 25, "Modify Record");
 	modifyButton->callback(modifyCallback, (void*)&table);
 	}
 
 	//Delete Record Button
 	{ Fl_Button* deleteButton
-		= new Fl_Button(445, 350, 110, 25, "Delete Record");
+		= new Fl_Button(445, 330, 110, 25, "Delete Record");
 	deleteButton->callback(deleteCallback, (void*) &table);
 	}
 

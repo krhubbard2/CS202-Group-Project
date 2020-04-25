@@ -5,7 +5,7 @@
 #include "phonebook.hpp"
 
 tuple<string, string, double> Phonebook::getTuple(const int& n) const { return _phonebook[n]; }
-void Phonebook::setTuple(int R, int C, std::string str) {
+void Phonebook::setPhone(int R, int C, std::string str) {
 	auto t = &_phonebook[R];
 
 	switch (C) {
@@ -16,6 +16,18 @@ void Phonebook::setTuple(int R, int C, std::string str) {
 		  break;
 	}
 }
+
+void Phonebook::setSearch(const string& str) {
+	auto v = std::find_if(_phonebook.begin(), _phonebook.end(), [str](const std::tuple<std::string, std::string, double> t)
+		{if (std::get<0>(t) == str || std::get<1>(t) == str || std::to_string(std::get<2>(t)) == str) return true; return false; });
+
+
+}
+
+void Phonebook::clearSearch() {
+	_searched.clear();
+}
+
 size_t Phonebook::size() const { return _phonebook.size(); }
 
 void Phonebook::deleteRecord(const int& n) {

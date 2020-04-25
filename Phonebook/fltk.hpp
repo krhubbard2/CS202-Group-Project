@@ -92,8 +92,8 @@ public:
 		// Cols
 		cols(3);             // how many columns
 		col_header(1);              // enable column headers (along top)
-		col_width_all(162);          // default width of columns
-		col_resize(1);              // enable column resizing
+		col_width_all(169);          // default width of columns
+		col_resize(0);              // enable column resizing
 		end();                      // end the Fl_Table group
 		context_edit = CONTEXT_NONE;
 		row_edit = col_edit = 0;
@@ -107,26 +107,38 @@ public:
 	double getRecord(const int& num) const { return get<2>(_pb.getTuple(num)); }
 	void printAll() const { _pb.printRecords(); }
 	void modifyState() { modify = (modify) ? false : true; }
+	bool searchState() { searching = (searching) ? false : true; return searching; }
+	void clearSearch() { _pb.clearSearch(); }
 	~MyTable() { }
 private:
 	Phonebook _pb;
 	bool modify = false;
+	bool searching = false;
 };
 
-void file_open_cb(Fl_Widget* w, void* data);
+//Callbacks
 
+//Menu items
 void save(Fl_Widget* w, void* data);
 void quitProgram(Fl_Widget* w, void* data);
 void quit(Fl_Widget* w, void* data);
 void open(Fl_Widget* w, void* data);
 void help(Fl_Widget* w, void* data);
-void searchCallback(Fl_Widget* w, void* data);
-void modifyCallback(Fl_Widget* w, void* data);
-void addCallback(Fl_Widget* w, void* data);
-void deleteCallback(Fl_Widget* w, void* data);
-void redraw(Fl_Widget* w, void* data);
-void submitCallback(Fl_Widget* w, void* data);
 void submitFile(Fl_Widget* w, void* data);
+
+//Search items
+void searchCallback(Fl_Widget* w, void* data);
+void clearCallback(Fl_Widget* w, void* data);
+
+//Modify items
+void modifyCallback(Fl_Widget* w, void* data);
+
+//Add items
+void addCallback(Fl_Widget* w, void* data);
+void submitCallback(Fl_Widget* w, void* data);
+
+//Delete items
+void deleteCallback(Fl_Widget* w, void* data);
 
 
 #endif

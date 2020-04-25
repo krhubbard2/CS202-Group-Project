@@ -121,8 +121,23 @@ void MyTable::addPb(string& first, string& last, double& phone){
 void searchCallback(Fl_Widget* w, void* data)
 {
 	cout << "Search Record\n";
+
+	Fl_Input* inp = (Fl_Input*)data;
+
+
 }
 
+//Clear Button that refreshes the table to its normal state
+//not searched state
+void clearCallback(Fl_Widget* w, void* data) {
+	MyTable* table = (MyTable*)data;
+
+	if (table->searchState())
+		table->clearSearch();
+	else
+		table->searchState();
+
+}
 //Modify Record Button Callback
 void modifyCallback(Fl_Widget* w, void* data)
 {
@@ -389,7 +404,7 @@ void MyTable::done_editing() {
 
 void MyTable::set_value_hide() {
 
-	_pb.setTuple(row_edit, col_edit, input->value());
+	_pb.setPhone(row_edit, col_edit, input->value());
 
 	cout << input->value() << "\t" << col_edit << endl;
 
