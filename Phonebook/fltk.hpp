@@ -5,7 +5,7 @@
 
 #ifndef FLTK_HPP_
 #define FLTK_HPP_
-//#define WIN32
+#define WIN32
 
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>

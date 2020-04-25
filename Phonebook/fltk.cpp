@@ -350,6 +350,9 @@ void MyTable::start_editing(TableContext context, int R, int C) {
 	row_edit = R;
 	col_edit = C;
 
+	if (!modify)
+		return;
+
 	string cell_value;
 	switch (C) {
 	case 0: cell_value = get<0>(_pb.getTuple(R)); break;
