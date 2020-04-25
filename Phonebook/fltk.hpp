@@ -107,7 +107,8 @@ public:
 	double getRecord(const int& num) const { return get<2>(_pb.getTuple(num)); }
 	void printAll() const { _pb.printRecords(); }
 	void modifyState() { modify = (modify) ? false : true; }
-	bool searchState() { searching = (searching) ? false : true; return searching; }
+	void searchState() { searching = (searching) ? false : true; }
+	bool search() const { return searching; }
 	void clearSearch() { _pb.clearSearch(); }
 	~MyTable() { }
 private:

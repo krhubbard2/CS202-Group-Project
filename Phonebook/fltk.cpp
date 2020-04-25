@@ -124,7 +124,7 @@ void searchCallback(Fl_Widget* w, void* data)
 
 	Fl_Input* inp = (Fl_Input*)data;
 
-
+	
 }
 
 //Clear Button that refreshes the table to its normal state
@@ -132,10 +132,11 @@ void searchCallback(Fl_Widget* w, void* data)
 void clearCallback(Fl_Widget* w, void* data) {
 	MyTable* table = (MyTable*)data;
 
-	if (table->searchState())
-		table->clearSearch();
-	else
-		table->searchState();
+	if (table->search())
+		return;
+
+	table->searchState();
+	table->clearSearch();
 
 }
 //Modify Record Button Callback

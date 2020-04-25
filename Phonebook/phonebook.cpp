@@ -17,11 +17,24 @@ void Phonebook::setPhone(int R, int C, std::string str) {
 	}
 }
 
-void Phonebook::setSearch(const string& str) {
-	auto v = std::find_if(_phonebook.begin(), _phonebook.end(), [str](const std::tuple<std::string, std::string, double> t)
-		{if (std::get<0>(t) == str || std::get<1>(t) == str || std::to_string(std::get<2>(t)) == str) return true; return false; });
+void Phonebook::setSearch(string& str) {
+	if (str.size() == 0)
+		return;
 
+	std::for_each(str.begin(), str.end(), [](char& c) {return std::tolower(c); });
 
+	std::string f, l, p;
+	for (auto v : _phonebook) {
+		f = std::get<0>(v);
+		l = std::get<1>(v);
+		p = std::to_string(std::get<2>(v));
+
+		std::for_each(f.begin(), f.end(), [](char& c) {return std::tolower(c); });
+		std::for_each(l.begin(), l.end(), [](char& c) {return std::tolower(c); });
+
+		if (f == str || l == str || p == str)
+			_searched.push_back(v);
+	}
 }
 
 void Phonebook::clearSearch() {

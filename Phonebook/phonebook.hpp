@@ -51,7 +51,7 @@ public:
 	void clearSearch();
 
 	//Search the string in all columns and populate searched with them
-	void setSearch(const string& str);
+	void setSearch(string& str);
 
 	//Return size of phonebook
 	size_t size() const;
