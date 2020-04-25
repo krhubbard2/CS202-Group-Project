@@ -14,7 +14,7 @@ void MyTable::saveFile(const string& fileName)
 	ofstream ifile(fileName);
 	if (ifile.is_open())
 	{
-		for (auto i = 0; i < _pb.size(); i++)
+		for (auto i = 0; i < _pb.sizeP(); i++)
 		{
 			string fname, lname;
 			double phone;
@@ -113,7 +113,7 @@ void MyTable::addPb(string& first, string& last, double& phone){
 
 	_pb.addRecord(first, last, phone);
 
-	rows(_pb.size());
+	rows(_pb.sizeP());
 	
 }
 
@@ -124,11 +124,21 @@ void searchCallback(Fl_Widget* w, void* data)
 	Fl_Button* a = (Fl_Button*)w;
 	Fl_Input* b = (Fl_Input*)a->parent()->child(2);
 
+	//When search is clicked without any input
+	std::string str = b->value();
+	if (str == "")
+		return;
+
 	//Search the word
 	MyTable* table = (MyTable*)data;
-	//table->searchState();
-	table->search(b->value());
-	
+
+	//We set rows twice
+	//To refresh the table and when only 1 item is found
+	//and the next searched item also only 1 exists the table does not refresh
+	//By setting the rows twice it refreshes succesfuly
+	table->rows(0);
+	table->rows(table->search(b->value()));
+
 }
 
 //Clear Button that refreshes the table to its normal state
@@ -138,14 +148,18 @@ void clearCallback(Fl_Widget* w, void* data) {
 	Fl_Button* a = (Fl_Button*)w;
 	Fl_Input* b = (Fl_Input*)a->parent()->child(2);
 
-	b->value(" ");
+	//Clear the input field
+	b->value("");
 
+	//Check if there are searched items
+	//If there are none do nothing
+	//If there is clear the searched vector and redraw the original table
 	MyTable* table = (MyTable*)data;
-	if (table->search())
+	if (!table->search())
 		return;
 	table->searchState();
 	table->clearSearch();
-
+	table->rows(table->phonebook());
 }
 //Modify Record Button Callback
 void modifyCallback(Fl_Widget* w, void* data)
@@ -287,10 +301,12 @@ void MyTable::draw_cell(TableContext context, int ROW, int COL, int X , int Y , 
 		if (context_edit == context && ROW == row_edit && COL == col_edit && input->visible())
 			return;
 		tuple<std::string, std::string, double> tp;
-		if (!searching)
-			tp = _pb.getPhone(ROW);
-		else
+		//Drawing data to choose from searched items or the whole data.
+		if (searching)
 			tp = _pb.getSearch(ROW);
+		else
+			tp = _pb.getPhone(ROW);
+
 		switch (COL) {
 		case 0: str = get<0>(tp); break;
 		case 1: str = get<1>(tp); break;

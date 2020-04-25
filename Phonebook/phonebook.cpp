@@ -19,34 +19,52 @@ void Phonebook::setPhone(int R, int C, std::string str) {
 
 tuple<string, string, double> Phonebook::getSearch(const int& n) const { return _searched[n]; }
 
-void Phonebook::setSearch(string& str) {
+size_t Phonebook::setSearch(string str, bool& srch) {
+	//This should not happen
 	if (str.size() == 0)
-		return;
+		return 0;
 
+	//Clear the old vector to not get duplicating rows in table
+	//When search is clicked multiple times and the values are not changed it duplicates
+	_searched.clear();
+
+	//Set the searched value to lowercase for easier comparing
 	std::for_each(str.begin(), str.end(), [](char& c) {c = std::tolower(c); });
 
 
 	std::string f, l, p;
 	for (auto v : _phonebook) {
+		//Get the values of ROWS
 		f = std::get<0>(v);
 		l = std::get<1>(v);
 		p = std::to_string(std::get<2>(v));
-
+		//Set them to lower case for easier comparing
 		std::for_each(f.begin(), f.end(), [](char& c) {c = std::tolower(c); });
 		std::for_each(l.begin(), l.end(), [](char& c) {c = std::tolower(c); });
 
+		//Push back all the matching values to the searched vector
 		if (f == str || l == str || p == str)
 			_searched.push_back(v);
 	}
 
-		
+	//This is set to true because the state is currently searching
+	srch = true;
+
+	////TEsting print
+	//for (auto v : _searched)
+	//	std::cout << std::get<0>(v) << " " << std::get<1>(v) << " " << std::get<2>(v) << std::endl;
+	//Return the size of searched vector
+	//AKA ROW number of searched items
+	return _searched.size();
 }
 
 void Phonebook::clearSearch() {
+	//Clear out the searched vector
 	_searched.clear();
 }
 
-size_t Phonebook::size() const { return _phonebook.size(); }
+size_t Phonebook::sizeP() const { return _phonebook.size(); }
+size_t Phonebook::sizeS() const { return _searched.size(); }
 
 void Phonebook::deleteRecord(const int& n) {
 	_phonebook.erase(_phonebook.begin() + n);

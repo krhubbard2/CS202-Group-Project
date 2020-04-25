@@ -110,7 +110,8 @@ public:
 	void searchState() { searching = (searching) ? false : true; }
 	bool search() const { return searching; }
 	void clearSearch() { _pb.clearSearch(); }
-	void search(std::string str) {  _pb.setSearch(str); }
+	size_t search(std::string str) {  return _pb.setSearch(str, searching); }
+	size_t phonebook() const { return _pb.sizeP(); }
 	~MyTable() { }
 private:
 	Phonebook _pb;

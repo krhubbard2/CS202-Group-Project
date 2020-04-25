@@ -47,15 +47,15 @@ public:
 
 	//Edit ROW/Tuple
 	void setPhone(int R, int C, std::string str);
+	//Search the string in all columns and populate searched with them
+	size_t setSearch(string str, bool& srch);
 
 	//this called when clear button pressed
 	void clearSearch();
 
-	//Search the string in all columns and populate searched with them
-	void setSearch(string& str);
-
 	//Return size of phonebook
-	size_t size() const;
+	size_t sizeP() const;
+	size_t sizeS() const;
 
 	//Opens and imports saved entries
 	void openFile(const string& fileName);

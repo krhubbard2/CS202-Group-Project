@@ -21,7 +21,7 @@ int main(int argc, char** argv){
 	Fl_Double_Window* window = new Fl_Double_Window(605, 375, "Alaskan Phonebook");
 
 	//Table to display data
-	MyTable table(25, 45, 550, 275, pb.size());
+	MyTable table(25, 45, 550, 275, pb.sizeP());
 	table.setPb(pb);
 
 	//Drop down menu bar
