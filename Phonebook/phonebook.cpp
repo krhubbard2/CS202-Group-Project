@@ -11,7 +11,7 @@ void Phonebook::setTuple(int R, int C, std::string str) {
 	switch (C) {
 	case 0: get<0>(*t) = str; break;
 	case 1: get<1>(*t) = str; break;
-	case 2: try { get<2>(*t) = std::stoi(str); }
+	case 2: try { get<2>(*t) = std::stod(str); }
 		  catch (std::invalid_argument e) { break; }
 		  break;
 	}
