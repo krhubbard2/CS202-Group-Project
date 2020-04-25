@@ -55,17 +55,11 @@ public:
 	//Saves entries for importing later
 	void saveFile(const string& fileName);
 
-	//Displays main menu
-	void printMenu();
-
 	//Adds a new record to vector
-	void addRecord(string first, string last, double phone);
+	void addRecord(const string& first, const string& last,const double& phone);
 
 	//Prints all current records
 	void printRecords() const;
-
-	//Allows user to modify existing records.
-	void modifyRecord();
 
 	//Deletes record (implements deleteRecord(F,L,P))
 	void deleteRecord(const int& n);
@@ -75,18 +69,6 @@ public:
 	vector<tuple<string, string, double>>::iterator begin() { return _phonebook.begin(); }
 	vector<tuple<string, string, double>>::iterator end() { return _phonebook.end(); }
 
-	////Search records by last name
-	//void searchRecordLast(vector<tuple<string, string, double>> vec, string name);
-	//
-	////Search records by first name
-	//void searchRecordFirst(vector<tuple<string, string, double>> vec, string name);
-	//
-	////Search records by phone number
-	//void searchRecordPhone(vector<tuple<string, string, double>> vec, double phone);
-	//
-	////Searches existing records
-	//void searchRecord(vector<tuple<string, string, double>> &vec);
-	//
 private:
 	vector<tuple<string, string, double>> _phonebook;
 };

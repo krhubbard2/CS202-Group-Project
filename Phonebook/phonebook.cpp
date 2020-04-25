@@ -106,10 +106,10 @@ void Phonebook::openFile(const string& fileName)
 }
 
 //Adds record to existing Vector
-void Phonebook::addRecord(string first, string last, double phone)
+void Phonebook::addRecord(const string& first, const string& last, const double& phone)
 {
   //Adds input to Vector
-  _phonebook.push_back(make_tuple(first, last, phone));
+  _phonebook.push_back(make_tuple(first,last, phone));
 }
 
 //Sort vector (tuple) by second item (last name)

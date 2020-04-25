@@ -110,7 +110,11 @@ void quitProgram(Fl_Widget* w, void* data)
 }
 
 void MyTable::addPb(string& first, string& last, double& phone){
+
 	_pb.addRecord(first, last, phone);
+
+	rows(_pb.size());
+	
 }
 
 //Search Record Button Callback
@@ -146,7 +150,7 @@ void submitCallback(Fl_Widget* w, void* data){
 	string phoneS = d->value();
 
 	istringstream iss(phoneS);
-	double phone;
+	double phone = 0;
 	iss >> phone;
 
 	//If proper phone entry
@@ -165,7 +169,7 @@ void submitCallback(Fl_Widget* w, void* data){
 	o->show();
 	box->show();
 	}
-	cout << first << " " << last << " " << phone << "\n";
+	//cout << first << " " << last << " " << phone << "\n";
 }
 
 //Add Record Button Callback
@@ -183,7 +187,7 @@ void addCallback(Fl_Widget* w, void* data){
 	Fl_Input* phoneNumberInput = new Fl_Input(330, 50, 175, 40);
 	Fl_Button* submitButton = new  Fl_Button(175, 135, 165, 60, "Submit");
 	//On button press run submitCallback
-	submitButton->callback(submitCallback, (void*) &t);
+	submitButton->callback(submitCallback, (void*) t);
 
 
 
