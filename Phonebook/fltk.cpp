@@ -76,7 +76,7 @@ Fl_Output* out = new Fl_Output(95, 25, 430, 25, "File Selected: ");
 window->show();
 
 //Callback for submit
-button->callback(submitFile, (void*) &t);
+button->callback(submitFile, (void*) t);
 //Show file selection
 out->value(userFile.c_str());
 }
@@ -85,9 +85,10 @@ out->value(userFile.c_str());
 void submitFile(Fl_Widget* w, void* data){
 	auto p =(MyTable*)data;
 	p->openFileFLTK(userFile);
-	Fl_Window* a = (Fl_Window*) w;
+	Fl_Button* a = (Fl_Button*) w;
+
 	//Hide submit file window
-	a->hide();
+	a->parent()->hide();
 	cout << userFile;
 }
 
@@ -114,7 +115,7 @@ void MyTable::addPb(string& first, string& last, double& phone){
 	_pb.addRecord(first, last, phone);
 
 	rows(_pb.sizeP());
-	
+
 }
 
 //Search Record Button Callback
